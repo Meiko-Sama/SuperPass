@@ -1,0 +1,104 @@
+TÓPICOS
+
+1.	INTRODUÇÃO
+2.	REQUISITOS FUNCIONAIS
+3.	REQUISITOS NÃO FUNCIONAIS
+4.	EXPECTATIVA DE DESIGN
+5.	ESCOPO
+6.	CRONOGRAMA E PRAZOS
+7.	METAS
+8.	FUNÇÃO DE CADA COLABORADOR
+9.	FRAMEWORKS E ARQUITETURA
+
+
+O SuperPass é um aplicativo que foi criado com o intuito de fornecer uma forma mais rápida de conectar o usuário as academias, independentemente de
+sua posição geográfica, utilizando o sistema de check-in para o usuário frequentar a academia, além disso o aplicativo contará com uma interface onde
+um corpo será visível, nele o usuário poderá marcar as partes do corpo treinados feito no dia e um calendário na qual mostrará os dias idos na academia. O público alvo principal desse projeto é pessoas interessadas que buscam uma forma de poder encontrar uma academia para frequentar de forma simples, rápida e intuitiva.
+
+
+1.	REQUISITOS FUNCIONAIS
+
+1.1	– ON BOARDING E AUTENTIFICAÇÃO
+
+•	Tela de On Boarding - (Tela que vai trazer algumas informações do aplicativo antes de direcionar a tela de Cadastro);
+•	Tela de Cadastro – O visitante faz o processo para se cadastrar com email nome de usuário e senha e será deslocado direto para a página Home, sendo
+necessário fazer essa etapa apenas 1 vez.
+•	Tela de Login - Se o usuário já tem uma conta ele faz o login e será redirecionado a tela Home;
+
+1.2	– HUB DO USUÁRIO
+
+•	Tela Home – Tela principal do aplicativo, nela inclui 3 carrosséis principais, sendo eles: Academias perto de você, Academias mais avaliadas e
+Academias que o usuário já tem o Check-In;
+•	Tela de Check-In – Nessa tela fica disponível os Check-In feita pelo membro e mostrando quais academias;
+•	Tela de Perfil – Ela mostra além das informações de cadastro uma interface de um corpo humano na qual a pessoa poderá marcar um membro do corpo e
+uma porcentagem do treino realizado e um calendário que marca os dias frequentados.
+
+2.	REQUISITOS NÃO FUNCIONAIS
+
+2.1	– SEGURANÇA DO USUARIO
+
+•	Criptografia de informações coletadas do usuário;
+•	 Proteção contra injeção SQL;
+•	Autenticação de senha por dois fatore.
+
+2.2	 – USABILIDADE DO APP
+
+•	Interface intuitiva e fácil de usar;
+•	 Paleta de cores com tons suaves para maior conforto do usuário;
+
+2.3	– MANUTENÇÃO DO APP
+•	Sistema fácil de atualizar;
+•	Plano de recuperação de backups;
+
+2.4	– ARMAZENAMENTO DE DADOS
+•	Dados devem ser enviados corretamente no banco de dados;
+
+3.	EXPECTATIVAS DE DESIGN
+
+Para tentar trazer algo mais moderno e chamativo, as cores escolhidas são o verde neon, preto e branco, cores simples e diferentes, mas quando juntas
+traz justamente o que buscamos.
+
+
+4.	ESCOPO
+
+No primeiro contato com o aplicativo SuperPass aparecerá a tela ONBORADING, uma tela que dará mais informações sobre as funcionalidades do app de antes
+de mandar o usuário a tela de CADASTRO/LOGIN. Depois de realizar o cadastro ou entrar com a sua conta ele será redirecionado ao HUB, nele terá 3 rotas:
+
+•	TELA HOME – Essa tela mostrará as academias separas em diferentes filtros, as mais bem avaliadas, academia perto de mim, academias que o usuário já
+tem o check-in. Seria realizado nessa tela 3 carrosséis utilizando os filtros, além de ter um rodapé com os ícones de navegação indo para as outras
+páginas do app.
+
+•	TELA CHECK-IN – A tela de check-in busca apresentar as academias visitadas pelo o usuário, academias para visitar e avaliações.
+
+•	TELA PERFIL– Essa tela conterá as informações do usuário cadastrado,  terá o calendário onde o próprio usuário marca os dias idos a academia e uma
+função que terá um corpo humano onde o usuário marca a parte do corpo treinada durante o dia, cada parte pintada representa uma porcentagem, ao atingir
+100% mostra uma mensagem parabenizando por ter completo e reinicia.
+
+
+5.	CRONOGRAMA E PRAZOS
+
+Nas primeiras aulas, a prioridade será fazer o BACK-END o mais rápido possível para que o FRONT-END, parte principal do projeto, esteja pronto antes
+da metade de novembro para que seja possível fazer uma revisão e checagem de bugs, tendo a finalidade de que o aplicativo seja entregue no prazo.
+
+
+6.	METAS
+
+•	Fazer autenticação por duas etapas;
+•	Tema claro e escuro;
+•	Implementar Logout;
+•	A conta do usuário deve permanecer mesmo depois de ter fechado o app;
+•	Correção de todos os bugs;
+•	Fazer uma tela de planos na aba de perfil.
+•	Tela de Cadastro mais elaborada:
+  o	O visitante será deslocado para uma tela em que apresenta uma lista com empresas e ele deverá selecionar a que trabalha;
+  o	Depois disso o visitante deverá colocar o código de acesso de sua empresa;
+  o	Depois disso o usuário ele será deslocado direto para a página Home, sendo necessário fazer essa etapa apenas 1 vez.
+
+
+7.	ATRIBUIÇÃO DE CADA COLABORADOR
+
+•	Julia Custódio – Ficará encarregada do FRONT-END;
+•	Júlia Borgo – Ficará encarregada da documentação e da apresentação do trabalho final;
+•	Sarah Nicole – Ficará encarregada do FRONT-END e do BDD (Banco de Dados);
+•	Thaylini – Ficará encarregada da documentação e da apresentação do trabalho final;
+•	Thayná - Ficará encarregada do BACK-END e do BDD;
