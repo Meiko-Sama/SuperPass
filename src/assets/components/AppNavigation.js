@@ -36,13 +36,6 @@ export default function AppNavigation() {
     }
   }
 
-  const checkIfAlredyLoggedIn = async () => {
-    let
-
-  }
-
-
-
   // IF DE SEGURANÇA - Se não tiver encontrado nada, retorna nada
   if (showOnboarding === null) {
     return null
