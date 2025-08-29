@@ -1,16 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LottieView from 'lottie-react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
 import { StyleSheet } from 'react-native';
-
 import { setItem } from '../components/AsyncStorage';
-
 import React, { useState, useEffect } from 'react';
-// IMPORTAÇÃP STYLES
+// IMPORTAÇÃo STYLES
 import { styles } from '../styles/styles';
 
 const { width, height } = Dimensions.get("window")
@@ -33,6 +30,7 @@ export default function OnBoarding() {
   return (
     <SafeAreaView style={styles.containerOB}>
       <Onboarding
+        style={styles.barra}
         onDone={handleDone}
         onSkip={handleDone}
         DoneButtonComponent={doneButton}
@@ -41,24 +39,24 @@ export default function OnBoarding() {
           backgroundColor: "black",
           image: (
             <View style={style.lottie}>
-              <LottieView
-                source={require("../images/docinhopeso.png")}
+              <Image
+                source={require("../images/docinhomusculosa.png")}
                 autoPlay
-                loop
-                style={{ width: '100%', height: '100%' }} />
+                style={{ width: '100%', height: '800' }} />
             </View>),
-          title: "Bem-vindo ao SuperPass!!!"
+          title: "Bem-vindo ao SuperPass!!!",
+          subtitle: "Hello word"
         },
 
         {
           backgroundColor: "black",
           image: (
             <View style={style.lottie}>
-              <LottieView
-                source={require("../images/docinholevantapeso.png")}
+              <Image
+                source={require("../images/cotage.png")}
                 autoPlay
                 loop
-                style={{ width: '100%', height: '100%' }} />
+                style={{ width: '355', height: '540' }} />
             </View>),
           title: "Acesse"
         },
@@ -67,11 +65,11 @@ export default function OnBoarding() {
           backgroundColor: "black",
           image: (
             <View style={style.lottie}>
-              <LottieView
-                source={require("../images/docinholevantapeso.png")}
+              <Image
+                source={require("../images/docinhomusculosa.png")}
                 autoPlay
                 loop
-                style={{ width: '100%', height: '100%' }} />
+                style={{ width: '100%', height: '540' }} />
             </View>),
           title: "Espero que você aproveite o app"
         }
@@ -80,18 +78,21 @@ export default function OnBoarding() {
       />
 
     </SafeAreaView>
+
   );
 }
 
 export const style = StyleSheet.create({
   lottie: {
     width: width * 0.9,
-    height: width
+    height: width,
+    display: "flex",
+    bottom: 200
   },
 
   doneButton: {
     padding: 20,
-    backgroundColor: "#fff",
+    backgroundColor: 'rgb(10, 146, 11)',
     borderTopLeftRadius: "100%",
     borderBottomLeftRadius: "100%"
   },

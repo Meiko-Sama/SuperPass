@@ -10,7 +10,18 @@ export const styles = StyleSheet.create({
 
   containerOB: {
     flex: 1,
-    backgroundColor: 'rgb(251, 49, 150)',
   },
+
+  barra: {
+    backgroundColor: 'rgb(10, 146, 11)',
+  },
+
+  containerForm: {
+    backgroundColor: 'rgb(244, 248, 244)',
+    width: "100%",
+    height: "100%",
+    paddingTop: 35
+
+  }
 });
 
