@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Text, ImageBackground, TouchableOpacity, View, Pressable } from 'react-native';
 
 // IMPORTANDO O ICONE
-import Foundation from '@expo/vector-icons/Foundation';
+// import Foundation from '@expo/vector-icons/Foundation';
 
 import { styles } from '../styles/styles';
 
@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { setItem } from '../components/AsyncStorage';
 
 // IMPORTAÇÃO DE ICONE
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+// import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function Login() {
 
@@ -24,26 +24,18 @@ export default function Login() {
   }
 
   return (
-    <ImageBackground style={styles.containerSI} source={require("../images/cotage.png")}>
-      <MaterialIcons name="movie" size={100} color="white" style={{ left: -120, bottom: 180 }} />
+    <ImageBackground style={styles.containerForm}>
+      <View>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 22 }}>Página de Questionário</Text>
+        <Text style={{ color: 'white', paddingTop: 30, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, justifyContent: "center", }}>Informações pessoais:</Text>
 
 
-
-      <Text style={styles.tituloSI}>ACESSE SUA CONTA!</Text>
-      <Text style={styles.subTituloSI}> Bem vindo de volta usuário!</Text>
-
-      <View style={styles.campo}>
-        <TextComp txt="Email:" />
-        <InputComp textPlaceHolder={"Digite seu email"} password={false} />
-        <TextComp txt="Senha:" />
-        <InputComp textPlaceHolder={"Digite sua senha"} password={true} />
       </View>
-
-      <TouchableOpacity onPress={handleLogin} style={styles.btnSI} >
-        <Text style={styles.cadastroSI}> ENTRAR </Text>
-      </TouchableOpacity>
-
+      <StatusBar hidden />
     </ImageBackground>
-  );
 
+
+
+  );
 }

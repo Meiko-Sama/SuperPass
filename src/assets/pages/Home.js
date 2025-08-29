@@ -19,13 +19,11 @@ export default function Home() {
   // DECLARANDO O NAVIGATION
   const navigation = useNavigation();
 
-  // FAZENDO FUNÇÃO DO BOTÃO ENVIAR PARA PAGINA HOME
   const handleReset = async () => {
     await removeItem("login");
     navigation.push("Login")
   }
 
-  // FUNÇÃO PARA DIRECIONAR PARA PAGINA DE GALERIA DE FILMES
   const CheckIn = () => {
     navigation.navigate("CheckIn")
   }
@@ -36,13 +34,13 @@ export default function Home() {
 
 
   return (
-    <ImageBackground style={styles.container} source={require("../images/cotage.png")}>
+    <ImageBackground style={styles.container} source={require("../images/docinhomusculosa.png")}>
       <MaterialIcons name="movie" size={250} color="white" />
 
       <Text style={{ color: "white", fontSize: 25, fontWeight: "bold" }}> BEM VINDO A TELA HOME! </Text>
       <Text style={{ color: "white", fontSize: 15 }}> O que deseja fazer?</Text>
 
-      <TouchableOpacity onPress={Gallery} style={styles.galleryBTN}>
+      <TouchableOpacity style={styles.galleryBTN}>
         <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>Ir para a Galeria</Text>
       </TouchableOpacity>
 

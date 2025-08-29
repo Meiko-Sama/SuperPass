@@ -8,13 +8,13 @@ import Perfil from "../pages/Perfil";
 import Home from "../pages/Home";
 import CheckIn from "../pages/CheckIn";
 import Login from "../pages/Login";
-import Cadastro from "../pages/Cadastro"; // não tinha no seu import!
 
 // DECLARANDO STACK
 const Stack = createNativeStackNavigator();
 
 // ASYNC STORAGE
 import { getItem } from "./AsyncStorage";
+import Onboarding from "react-native-onboarding-swiper";
 
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
@@ -69,9 +69,9 @@ export default function AppNavigation() {
   if (showLogin) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
+        <Stack.Navigator initialRouteName="OnBoarding">
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+          <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
@@ -83,10 +83,10 @@ export default function AppNavigation() {
   // Se já fez onboarding e já está logado → vai direto pro Home
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="OnBoarding">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
         <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
         <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
       </Stack.Navigator>

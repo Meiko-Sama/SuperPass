@@ -12,7 +12,7 @@ export default function CheckIn() {
 
   return (
     <View>
-
+      <Text> TESTE </Text>
     </View>
 
   );
