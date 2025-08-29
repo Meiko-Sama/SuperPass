@@ -12,7 +12,6 @@ export default function Perfil() {
 
   return (
     <View>
-      <Text>TESTE</Text>
     </View>
 
   );

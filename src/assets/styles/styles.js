@@ -12,17 +12,5 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgb(251, 49, 150)',
   },
-
-  lottie: {
-    width: width * 0.9,
-    height: width
-  },
-
-  doneButton: {
-    padding: 20,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: "100%",
-    borderBottomLeftRadius: "100%"
-  }
 });
 
