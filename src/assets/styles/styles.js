@@ -10,9 +10,6 @@ export const styles = StyleSheet.create({
 
   containerOB: {
     flex: 1,
-  },
-
-  barra: {
     backgroundColor: 'rgb(10, 146, 11)',
   },
 
@@ -20,7 +17,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'rgb(0, 0, 0)',
     width: "100%",
     height: "100%",
-    paddingTop: 130,
+    paddingTop: 60,
     paddingLeft: 30,
 
 

@@ -1,14 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, ImageBackground, TouchableOpacity, View, Pressable } from 'react-native';
+import { Text, ImageBackground, TextInput, TouchableOpacity, View, Pressable } from 'react-native';
 
-// IMPORTANDO O ICONE
-// import Foundation from '@expo/vector-icons/Foundation';
+// Importação dos INPUTS
+import CadastroInput from '../components/CadastroInput';
 
+// IMPORTAÇÃO STYLES
 import { styles } from '../styles/styles';
 
 // IMPORTAÇÃO NATIVE
 import { useNavigation } from '@react-navigation/native';
 import { setItem } from '../components/AsyncStorage';
+import CadastroText from '../components/CadastroText';
 
 // IMPORTAÇÃO DE ICONE
 // import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -28,8 +30,19 @@ export default function Login() {
       <View>
         <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 22 }}>Página de Questionário</Text>
         <Text style={{ color: 'white', paddingTop: 30, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
-        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, justifyContent: "center", }}>Informações pessoais:</Text>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, position: "absolute", top: 110, right: 110 }}>Informações pessoais:</Text>
 
+        <CadastroText txt="Nome Completo:" />
+        <CadastroInput />
+
+        <CadastroText txt="Idade:" />
+        <CadastroInput />
+
+        <CadastroText txt="CPF:" />
+        <CadastroInput />
+
+        <CadastroText txt="RG:" />
+        <CadastroInput />
 
       </View>
       <StatusBar hidden />
