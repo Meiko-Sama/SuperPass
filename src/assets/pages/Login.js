@@ -26,7 +26,10 @@ export default function Login() {
   return (
     <ImageBackground style={styles.containerForm}>
       <View>
-        <Text>Página de Questionário</Text>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 22 }}>Página de Questionário</Text>
+        <Text style={{ color: 'white', paddingTop: 30, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, justifyContent: "center", alignContent: "center" }}>Informações pessoais:</Text>
+
 
       </View>
       <StatusBar hidden />

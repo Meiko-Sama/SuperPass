@@ -53,7 +53,7 @@ export default function OnBoarding() {
           image: (
             <View style={style.lottie}>
               <Image
-                source={require("../images/cotage.png")}
+                source={require("../images/docinhomusculosa.png")}
                 autoPlay
                 loop
                 style={{ width: '355', height: '540' }} />
@@ -66,7 +66,7 @@ export default function OnBoarding() {
           image: (
             <View style={style.lottie}>
               <Image
-                source={require("../images/docinhomusculosa.png")}
+                source={require("../images/DocinhoAdulta2.png")}
                 autoPlay
                 loop
                 style={{ width: '100%', height: '540' }} />

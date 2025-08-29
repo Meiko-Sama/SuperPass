@@ -17,10 +17,12 @@ export const styles = StyleSheet.create({
   },
 
   containerForm: {
-    backgroundColor: 'rgb(244, 248, 244)',
+    backgroundColor: 'rgb(0, 0, 0)',
     width: "100%",
     height: "100%",
-    paddingTop: 35
+    paddingTop: 130,
+    paddingLeft: 30,
+
 
   }
 });
