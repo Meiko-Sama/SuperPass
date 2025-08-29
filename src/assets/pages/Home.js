@@ -19,13 +19,11 @@ export default function Home() {
   // DECLARANDO O NAVIGATION
   const navigation = useNavigation();
 
-  // FAZENDO FUNÇÃO DO BOTÃO ENVIAR PARA PAGINA HOME
   const handleReset = async () => {
     await removeItem("login");
     navigation.push("Login")
   }
 
-  // FUNÇÃO PARA DIRECIONAR PARA PAGINA DE GALERIA DE FILMES
   const CheckIn = () => {
     navigation.navigate("CheckIn")
   }
