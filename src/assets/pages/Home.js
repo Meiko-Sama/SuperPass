@@ -26,13 +26,17 @@ export default function Home() {
   }
 
   // FUNÇÃO PARA DIRECIONAR PARA PAGINA DE GALERIA DE FILMES
-  const Gallery = () => {
-    navigation.navigate("Gallery")
+  const CheckIn = () => {
+    navigation.navigate("CheckIn")
+  }
+
+  const Perfil = () => {
+    navigation.navigate("Perfil")
   }
 
 
   return (
-    <ImageBackground style={styles.container} source={require("../images/Home.jpg")}>
+    <ImageBackground style={styles.container} source={require("../images/cotage.png")}>
       <MaterialIcons name="movie" size={250} color="white" />
 
       <Text style={{ color: "white", fontSize: 25, fontWeight: "bold" }}> BEM VINDO A TELA HOME! </Text>

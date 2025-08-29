@@ -1,10 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, ImageBackground, TouchableOpacity, View, Pressable } from 'react-native';
 
-// IMPORTAÇÃO COMPONENTES
-import InputComp from '../components/InputComp';
-import TextComp from '../components/TextComp';
-
 // IMPORTANDO O ICONE
 import Foundation from '@expo/vector-icons/Foundation';
 
@@ -18,7 +14,7 @@ import { setItem } from '../components/AsyncStorage';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 
-export default function SignIn() {
+export default function Login() {
 
   const navigation = useNavigation();
 
@@ -29,7 +25,7 @@ export default function SignIn() {
     navigation.navigate("Home")
   }
   return (
-    <ImageBackground style={styles.containerSI} source={require("../images/LoginScreen.jpg")}>
+    <ImageBackground style={styles.containerSI} source={require("../images/cotage.png")}>
       <MaterialIcons name="movie" size={100} color="white" style={{ left: -120, bottom: 180 }} />
 
 

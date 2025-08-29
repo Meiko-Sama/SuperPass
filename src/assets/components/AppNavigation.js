@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 
 // IMPORTANDO AS PÁGINAS EXISTENTES
 import OnBoarding from "../pages/OnBoarding";
-import Cadastro from "../pages/Cadastro";
 import Perfil from "../pages/Perfil";
 
 // DECLARANDO STACK NAVIGATOR
@@ -48,7 +47,6 @@ export default function AppNavigation() {
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Onboarding">
           <Stack.Screen name="Onboarding" component={OnBoarding} options={{ headerShown: false }} />
-          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
