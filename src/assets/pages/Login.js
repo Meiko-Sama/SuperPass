@@ -13,17 +13,16 @@ import { setItem } from '../components/AsyncStorage';
 // IMPORTAÇÃO DE ICONE
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-
 export default function Login() {
 
   const navigation = useNavigation();
 
   // FAZENDO FUNÇÃO DO BOTÃO ENVIAR PARA PAGINA HOME
   const handleLogin = async () => {
-
     await setItem("login", "1")
     navigation.navigate("Home")
   }
+
   return (
     <ImageBackground style={styles.containerSI} source={require("../images/cotage.png")}>
       <MaterialIcons name="movie" size={100} color="white" style={{ left: -120, bottom: 180 }} />
@@ -46,6 +45,5 @@ export default function Login() {
 
     </ImageBackground>
   );
-}
 
-//
+}

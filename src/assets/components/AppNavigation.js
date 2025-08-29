@@ -1,47 +1,56 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-// IMPORTAÇÃO USESTATE e USEEFFECT
 import { useState, useEffect } from "react";
 
-// IMPORTANDO AS PÁGINAS EXISTENTES
+// IMPORTANDO PÁGINAS
 import OnBoarding from "../pages/OnBoarding";
 import Perfil from "../pages/Perfil";
+import Home from "../pages/Home";
+import CheckIn from "../pages/CheckIn";
+import Login from "../pages/Login";
+import Cadastro from "../pages/Cadastro"; // não tinha no seu import!
 
-// DECLARANDO STACK NAVIGATOR
+// DECLARANDO STACK
 const Stack = createNativeStackNavigator();
 
-//IMPORTANDO ASYNC STORAGE
+// ASYNC STORAGE
 import { getItem } from "./AsyncStorage";
 
 export default function AppNavigation() {
-  const [showOnboarding, setShowOnboarding] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [showOnboarding, setShowOnboarding] = useState(null);
+  const [showLogin, setShowLogin] = useState(null);
 
+  // Checagem Onboarding
   useEffect(() => {
-    checkIfAlredyOnboarded();
-  }, [])
+    checkIfAlreadyOnboarded();
+    checkIfAlreadyLoggedIn();
+  }, []);
 
-  const checkIfAlredyOnboarded = async () => {
-    let onboarded = await getItem("onboarded")
-
-    console.log(onboarded)
-    console.log(typeof onboarded)
-
+  const checkIfAlreadyOnboarded = async () => {
+    let onboarded = await getItem("onboarded");
     if (onboarded === "1") {
-      setShowOnboarding(false)
+      setShowOnboarding(false);
     } else {
-      setShowOnboarding(true)
+      setShowOnboarding(true);
     }
+  };
+
+  // Checagem Login
+  const checkIfAlreadyLoggedIn = async () => {
+    let login = await getItem("login");
+    if (login === "1") {
+      setShowLogin(false);
+    } else {
+      setShowLogin(true);
+    }
+  };
+
+  // Se ainda não carregou os dados, retorna vazio
+  if (showOnboarding === null || showLogin === null) {
+    return null;
   }
 
-  // IF DE SEGURANÇA - Se não tiver encontrado nada, retorna nada
-  if (showOnboarding === null) {
-    return null
-  }
-
-  // Esse IF funciona caso o usuário nunca tiver entrado na tela ONBOARDING,
-  // fazendo que ele seja redirecionado para essa tela antes de ir para HOME
+  // Se ainda não fez onboarding → manda para Onboarding
   if (showOnboarding) {
     return (
       <NavigationContainer>
@@ -51,29 +60,36 @@ export default function AppNavigation() {
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
-
         </Stack.Navigator>
       </NavigationContainer>
-    )
-
-    // Esse ELSE funciona caso o usuário já tenha entrado na tela ONBOARDING,
-    // fazendo que ele seja redirecionado para a tela HOME diretamente.
-  } else {
-    if (logado) {
-
-    } else {
-      return (
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Onboarding" component={OnBoarding} options={{ headerShown: false }} />
-            <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
-            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-            <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
-            <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
-          </Stack.Navigator>
-        </NavigationContainer>
-      )
-    }
+    );
   }
+
+  // Se já fez onboarding → verifica login
+  if (showLogin) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+          <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+          <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
+          <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
+
+  // Se já fez onboarding e já está logado → vai direto pro Home
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+        <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
+        <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

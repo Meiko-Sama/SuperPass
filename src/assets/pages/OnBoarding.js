@@ -1,12 +1,6 @@
-import { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createComponentForStaticNavigation } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { getItem } from "../components/AsyncStorage";
-import Home from "./Home";
-import Login from "./Login"
-
-const Stack = createNativeStackNavigator();
+import { StatusBar } from 'expo-status-bar';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Image, Dimensions, FlatList } from 'react-native';
 
 export default function OnBoarding() {
   const [showOnboarding, setShowOnboarding] = useState(null)
@@ -24,6 +18,7 @@ export default function OnBoarding() {
       setShowOnboarding(true)
     }
   }
+
 
   if (showOnboarding === null) {
     return null
