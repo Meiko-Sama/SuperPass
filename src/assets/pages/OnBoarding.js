@@ -38,129 +38,64 @@ export default function OnBoarding() {
         pages={[{
           backgroundColor: "black",
           image: (
-            <View style={style.lottie}>
+            <View style={style.page}>
               <Image
                 source={require("../images/docinhomusculosa.png")}
                 autoPlay
                 style={{ width: '100%', height: '800' }} />
             </View>),
           title: "Bem-vindo ao SuperPass!!!",
-          subtitle: "Hello word"
+          titleStyles: {
+            fontSize: 25
+          },
+          subtitle: "O SuperPass é um aplicativo que foi criado para fornecer uma forma mais rápida de conectar o usuário as academias, independentemente de sua posição geográfica.",
+          subTitleStyles: {
+            fontSize: 17,
+            marginBottom: 100
+          },
         },
 
         {
           backgroundColor: "black",
           image: (
-            <View style={style.lottie}>
+            <View style={style.pageEspecial}>
               <Image
-                source={require("../images/docinhomusculosa.png")}
+                source={require("../images/docinhomalhada.png")}
                 autoPlay
                 loop
-                style={{ width: '355', height: '540' }} />
+                style={{ width: '100%', height: '800' }} />
             </View>),
-          title: "Acesse"
+          title: "Esperamos que você goste!!",
+          titleStyles: {
+            fontSize: 25
+          },
+          subtitle: "O aplicativo conta com um sistema de check-in, sistema de busca de academias no seu radar, uma interface com corpo disponível, um calendário para registar os dias de frequência na academia e muito mais!!",
+          subTitleStyles: {
+            fontSize: 17,
+            marginBottom: 100
+          },
         },
 
         {
           backgroundColor: "black",
           image: (
-            <View style={style.lottie}>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <View style={style.pageEspecialDois}>
               <Image
                 source={require("../images/DocinhoCega.png")}
                 autoPlay
                 loop
                 style={{ width: '100%', height: '540' }} />
             </View>),
-          title: "Espero que você aproveite o app"
+          title: "Esperamos que você aproveite o app!!",
+          titleStyles: {
+            fontSize: 25
+          },
+          subtitle: "O público alvo principal desse projeto são as pessoas interessadas em poder encontrar uma academia de forma simples, rápida e intuitiva.",
+          subTitleStyles: {
+            fontSize: 17,
+            marginBottom: 100
+          },
         }
-
         ]}
       />
 
@@ -170,11 +105,25 @@ export default function OnBoarding() {
 }
 
 export const style = StyleSheet.create({
-  lottie: {
+  page: {
     width: width * 0.9,
     height: width,
     display: "flex",
-    bottom: 200
+    bottom: 100
+  },
+
+  pageEspecial: {
+    width: width * 0.9,
+    height: width,
+    display: "flex",
+    bottom: 170
+  },
+
+  pageEspecialDois: {
+    width: width * 0.9,
+    height: width,
+    display: "flex",
+    bottom: 40
   },
 
   doneButton: {
@@ -183,5 +132,7 @@ export const style = StyleSheet.create({
     borderTopLeftRadius: "100%",
     borderBottomLeftRadius: "100%"
   },
+
+
 
 });
