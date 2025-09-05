@@ -7,8 +7,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import { setItem } from '../components/AsyncStorage';
 import React, { useState, useEffect } from 'react';
-// IMPORTAÇÃo STYLES
-import { styles } from '../styles/styles';
 
 const { width, height } = Dimensions.get("window")
 export default function OnBoarding() {
@@ -21,8 +19,8 @@ export default function OnBoarding() {
 
   const doneButton = ({ ...props }) => {
     return (
-      <TouchableOpacity style={style.doneButton} {...props}>
-        <Text>Done</Text>
+      <TouchableOpacity style={styles.doneButton} {...props}>
+        <Text style={styles.doneButtonText}>Done</Text>
       </TouchableOpacity>
     )
   }
@@ -30,15 +28,15 @@ export default function OnBoarding() {
   return (
     <SafeAreaView style={styles.containerOB}>
       <Onboarding
-        style={styles.barra}
         onDone={handleDone}
         onSkip={handleDone}
         DoneButtonComponent={doneButton}
+        bottomBarColor='rgb(10, 146, 11)'
         containerStyles={{ paddingHorizontal: 15 }}
         pages={[{
           backgroundColor: "black",
           image: (
-            <View style={style.page}>
+            <View style={styles.page}>
               <Image
                 source={require("../images/docinhomusculosa.png")}
                 autoPlay
@@ -58,7 +56,7 @@ export default function OnBoarding() {
         {
           backgroundColor: "black",
           image: (
-            <View style={style.pageEspecial}>
+            <View style={styles.pageEspecial}>
               <Image
                 source={require("../images/docinhomalhada.png")}
                 autoPlay
@@ -79,7 +77,7 @@ export default function OnBoarding() {
         {
           backgroundColor: "black",
           image: (
-            <View style={style.pageEspecialDois}>
+            <View style={styles.pageEspecialDois}>
               <Image
                 source={require("../images/DocinhoCega.png")}
                 autoPlay
@@ -104,7 +102,7 @@ export default function OnBoarding() {
   );
 }
 
-export const style = StyleSheet.create({
+export const styles = StyleSheet.create({
   page: {
     width: width * 0.9,
     height: width,
@@ -128,11 +126,23 @@ export const style = StyleSheet.create({
 
   doneButton: {
     padding: 20,
-    backgroundColor: 'rgb(10, 146, 11)',
+    backgroundColor: 'green',
+    borderWidth: 3.8,
+    borderColor: 'rgba(57, 242, 57, 0.77)',
     borderTopLeftRadius: "100%",
-    borderBottomLeftRadius: "100%"
+    borderBottomLeftRadius: "100%",
+    width: 80,
+    height: 70
   },
 
+  containerOB: {
+    flex: 1,
+    backgroundColor: 'black',
+  },
 
+  doneButtonText: {
+    color: "#fff",
+    fontSize: 14
+  }
 
 });

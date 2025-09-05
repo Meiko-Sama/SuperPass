@@ -3,7 +3,7 @@ import { TextInput } from "react-native";
 export default function CadastroInput() {
   return (
     <TextInput
-      style={{ width: 200, paddingTop: 80, left: 120, borderBottomWidth: 1, borderColor: "green", bottom: 20, color: "white" }}
+      style={{ width: 300, top: 70, left: 0, borderBottomWidth: 1, borderColor: "green", color: "white" }}
       textAlign="left"
     />
   )
