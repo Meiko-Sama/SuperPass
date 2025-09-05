@@ -14,11 +14,28 @@ export const styles = StyleSheet.create({
     height: "100%",
     paddingTop: 60,
     paddingLeft: 30,
+    position: "absolute",
+  },
+
+  pai: {
+    top: 50
+  },
+
+  title: {
+    color: 'rgb(10, 146, 11)',
+    fontSize: 20,
+    left: 10
+  },
+
+  escrita: {
+    bottom: 20,
   },
 
   objetivo: {
     color: "white",
-    top: 120
-  }
+    top: 130
+  },
+
+
 });
 

@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, ImageBackground, TextInput, TouchableOpacity, View, Pressable } from 'react-native';
 
+//Importar icones
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+
 // Importação dos INPUTS
 import CadastroInput from '../components/CadastroInput';
 
@@ -15,8 +18,11 @@ import { useNavigation } from '@react-navigation/native';
 import { setItem } from '../components/AsyncStorage';
 import CadastroText from '../components/CadastroText';
 import PressableInput from '../components/PressableInput';
+import OnBoarding from './OnBoarding';
+
 
 // IMPORTAÇÃO DE ICONE
+// OMG HIIIII ><
 // import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function Login() {
@@ -38,11 +44,21 @@ export default function Login() {
 
   return (
     <ImageBackground style={styles.containerForm}>
-      <View>
-        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 22 }}>Página de Questionário</Text>
-        <Text style={{ color: 'white', paddingTop: 30, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
-        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, position: "absolute", top: 110, right: 110 }}>Informações pessoais:</Text>
 
+      {/* NÃAAAAO CLICA NO ICONE ... POR ENQUANTO */}
+      <View style={{ flexDirection: "row" }}>
+        <TouchableOpacity >
+          <FontAwesome name="arrow-circle-left" size={40} color='rgb(10, 146, 11)' onPress={OnBoarding} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Página de Questionário</Text>
+      </View>
+      <View style={styles.pai}>
+        <View style={styles.titleSubtitle}>
+
+
+          <Text style={{ color: 'white', paddingTop: 20, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
+          <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, position: "absolute", top: 80, right: 110 }}>Informações pessoais:</Text>
+        </View>
         {/* COMPONENTIZAÇÃO DOS INPUTS UTILIZADOS! */}
         <View style={styles.escrita}>
           <CadastroText txt="Nome Completo:" />

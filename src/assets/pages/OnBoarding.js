@@ -127,12 +127,11 @@ export const styles = StyleSheet.create({
   doneButton: {
     padding: 20,
     backgroundColor: 'green',
-    borderWidth: 5,
-    borderColor: 'rgb(57, 242, 57)',
-    opacity: 50,
+    borderWidth: 3.8,
+    borderColor: 'rgba(57, 242, 57, 0.77)',
     borderTopLeftRadius: "100%",
     borderBottomLeftRadius: "100%",
-    width: 90,
+    width: 80,
     height: 70
   },
 
@@ -142,7 +141,8 @@ export const styles = StyleSheet.create({
   },
 
   doneButtonText: {
-    color: "#fff"
+    color: "#fff",
+    fontSize: 14
   }
 
 });
