@@ -35,14 +35,11 @@ export default function Home() {
 
   return (
     <ImageBackground style={styles.container} source={require("../images/docinhomusculosa.png")}>
-      <MaterialIcons name="movie" size={250} color="white" />
+
 
       <Text style={{ color: "white", fontSize: 25, fontWeight: "bold" }}> BEM VINDO A TELA HOME! </Text>
       <Text style={{ color: "white", fontSize: 15 }}> O que deseja fazer?</Text>
 
-      <TouchableOpacity style={styles.galleryBTN}>
-        <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>Ir para a Galeria</Text>
-      </TouchableOpacity>
 
       {/* TEORICAMENTE AQUI É ONDE O REMOVE ITEM DEVE FICAR */}
       <TouchableOpacity onPress={handleReset} style={styles.resetBTN}>

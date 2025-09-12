@@ -12,7 +12,7 @@ export default function OnBoarding() {
 
   const handleDone = () => {
     setItem('onboarded', '1')
-    navigation.navigate("Login");
+    navigation.navigate("Cadastro");
   }
 
   const doneButton = ({ ...props }) => {
@@ -61,7 +61,7 @@ export default function OnBoarding() {
                 loop
                 style={{ width: '100%', height: '800' }} />
             </View>),
-          title: "Esperamos que você goste!!",
+          title: "O que oferecemos ao usuário:",
           titleStyles: {
             fontSize: 25
           },
@@ -82,7 +82,7 @@ export default function OnBoarding() {
                 loop
                 style={{ width: '100%', height: '540' }} />
             </View>),
-          title: "Esperamos que você aproveite o app!!",
+          title: "Aproveite o app!",
           titleStyles: {
             fontSize: 25
           },

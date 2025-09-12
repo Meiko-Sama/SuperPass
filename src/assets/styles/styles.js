@@ -9,33 +9,32 @@ export const styles = StyleSheet.create({
   },
 
   containerForm: {
-    backgroundColor: 'rgb(0, 0, 0)',
+    backgroundColor: '#000',
     width: "100%",
     height: "100%",
-    paddingTop: 60,
-    paddingLeft: 30,
-    position: "absolute",
+    paddingTop: 40,
+    paddingHorizontal: 10
   },
 
-  pai: {
-    top: 50
+  paiDoBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 45
   },
 
-  title: {
-    color: 'rgb(10, 146, 11)',
+  btnCadastro: {
+    backgroundColor: "rgb(10, 146, 11)",
+    padding: 15,
+    borderRadius: 60,
+    width: 350,
+    height: 55,
+    alignItems: "center"
+  },
+
+  textinho: {
     fontSize: 20,
-    left: 10
+    letterSpacing: 1.5,
+    fontWeight: 700
   },
-
-  escrita: {
-    bottom: 20,
-  },
-
-  objetivo: {
-    color: "white",
-    top: 130
-  },
-
-
 });
 

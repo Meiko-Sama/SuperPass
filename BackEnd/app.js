@@ -15,7 +15,7 @@ const bcrypt = require("bcrypt");
 // import jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-const PORT = 3001 // onde vai rodar o back-end
+const PORT = 8081 // onde vai rodar o back-end
 const app = express();
 
 dotenv.config();
@@ -30,63 +30,64 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 })
 
-// rota: CADASTRO
-app.post("/auth/cadastro", async (req, res) => {
+// rota: FORMULARIO
+app.post("/auth/Formulario", async (req, res) => {
   try {
     const { nome, idade, altura, peso
     } = req.body;
 
     // verificação dos campos
-    if (!nome, !idade, !altura, !peso) {
+    if (!nome || !idade || !altura || !peso) {
       return res.status(400).json({ error: "Preencha todos os campos!" });
     }
 
     await pool.query(
-      "INSERT INTO docinho (nome, idade, altura, peso) VALUES (?, ?, ?, ?)",
-      [nome, idade, altura, peso]
+      "INSERT INTO info (nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+      [nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem]
     );
+    console.log("REQ BODY:", req.body);
 
-    res.status(201).json({ message: "Usuário criado com sucesso!" })
+
+    res.status(201).json({ message: "Formulário cadastrado com sucesso!" })
 
     // mensagem de erro
   } catch (error) {
     console.log(error)
-    res.status(500).json({ error: "Erro ao registrar o usuário." })
+    res.status(500).json({ error: "Erro ao continuar." })
   }
 });
 
-// rota: LOGIN
-/* app.post("/auth/login", async (req, res) => {
+// rota: CADASTRO
+app.post("/auth/Cadastro", async (req, res) => {
   try {
-    const { email, senha } = req.body;
+    const { nome, idade, altura, peso } = req.body;
 
-    console.log(email, senha)
+    console.log(nome, idade, altura, peso)
 
-    const [rows] = await pool.query("SELECT * FROM users WHERE email = ?", [email])
+    const [rows] = await pool.query(
+      "SELECT * FROM info WHERE nome=? AND idade=? AND altura=? AND peso=?",
+      [nome, idade, altura, peso]
+    );
+
     if (rows.length === 0) {
       return res.status(400).json({ error: "Usuário não encontrado." })
     }
-
     const usuario = rows[0];
-    const senhaValida = await bcrypt.compare(senha, usuario.senha);
-    if (!senhaValida) {
-      return res.status(401).json({ error: "Senha incorreta" });
-    }
 
     // token do usuário (assinatura digital)
     const token = jwt.sign(
-      { id: usuario.id, email: usuario.email },
+      { id: usuario.id, nome: usuario.nome },
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     )
 
-    res.json({ message: "Login bem sucedido!", token })
+    res.json({ message: "cadastro bem sucedido!", token })
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Error ao fazer login!" })
+    res.status(500).json({ error: "Error ao fazer cadastro!" })
   }
-}) */
+})
 
 // -------------- Devolução das informações para o usuário-----------
 // MIDDLEWARE ↪ intermediário entre a requisição e a respostas
