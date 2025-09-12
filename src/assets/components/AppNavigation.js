@@ -7,7 +7,9 @@ import OnBoarding from "../pages/OnBoarding";
 import Perfil from "../pages/Perfil";
 import Home from "../pages/Home";
 import CheckIn from "../pages/CheckIn";
-import Login from "../pages/Login";
+import Formulario from "../pages/Formulario";
+import Cadastro from "../pages/Cadastro";
+import Codigo from "../pages/Codigo";
 
 // DECLARANDO STACK
 const Stack = createNativeStackNavigator();
@@ -18,7 +20,7 @@ import Onboarding from "react-native-onboarding-swiper";
 
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
-  const [showLogin, setShowLogin] = useState(null);
+  const [showFormulario, setShowFormulario] = useState(null);
 
   // Checagem Onboarding
   useEffect(() => {
@@ -35,18 +37,20 @@ export default function AppNavigation() {
     }
   };
 
-  // Checagem Login
+  // Checagem cadastro
   const checkIfAlreadyLoggedIn = async () => {
-    let login = await getItem("login");
-    if (login === "1") {
-      setShowLogin(false);
+    let formulario = await getItem("formulario");
+    if (formulario === "1") {
+      setShowFormulario(false);
     } else {
-      setShowLogin(true);
+      setShowFormulario(true);
     }
   };
 
+  //
+
   // Se ainda não carregou os dados, retorna vazio
-  if (showOnboarding === null || showLogin === null) {
+  if (showOnboarding === null || setShowFormulario === null) {
     return null;
   }
 
@@ -54,27 +58,31 @@ export default function AppNavigation() {
   if (showOnboarding) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Onboarding">
-          <Stack.Screen name="Onboarding" component={OnBoarding} options={{ headerShown: false }} />
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName="OnBoarding">
+          <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+          <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
+          <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
+          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
   }
 
-  // Se já fez onboarding → verifica login
-  if (showLogin) {
+  // Se já fez onboarding → verifica cadastro
+  if (showFormulario) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="OnBoarding">
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName="Formulario">
           <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+          <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
+          <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
+          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -83,12 +91,14 @@ export default function AppNavigation() {
   // Se já fez onboarding e já está logado → vai direto pro Home
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="OnBoarding">
+      <Stack.Navigator initialRouteName="Codigo">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
         <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+        <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
+        <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
+        <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

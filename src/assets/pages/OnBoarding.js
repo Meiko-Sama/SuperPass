@@ -1,12 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, View, TouchableOpacity, Dimensions, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import LottieView from 'lottie-react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet } from 'react-native';
 import { setItem } from '../components/AsyncStorage';
-import React, { useState, useEffect } from 'react';
 
 const { width, height } = Dimensions.get("window")
 export default function OnBoarding() {
@@ -14,7 +12,7 @@ export default function OnBoarding() {
 
   const handleDone = () => {
     setItem('onboarded', '1')
-    navigation.navigate("Login");
+    navigation.navigate("Cadastro");
   }
 
   const doneButton = ({ ...props }) => {
@@ -46,7 +44,7 @@ export default function OnBoarding() {
           titleStyles: {
             fontSize: 25
           },
-          subtitle: "O SuperPass é um aplicativo que foi criado para fornecer uma forma mais rápida de conectar o usuário as academias, independentemente de sua posição geográfica.",
+          subtitle: "SuperPass foi criado para fornecer uma forma mais rápida de conectar o usuário as academias, independentemente de sua localização.",
           subTitleStyles: {
             fontSize: 17,
             marginBottom: 100
@@ -63,11 +61,11 @@ export default function OnBoarding() {
                 loop
                 style={{ width: '100%', height: '800' }} />
             </View>),
-          title: "Esperamos que você goste!!",
+          title: "O que oferecemos ao usuário:",
           titleStyles: {
             fontSize: 25
           },
-          subtitle: "O aplicativo conta com um sistema de check-in, sistema de busca de academias no seu radar, uma interface com corpo disponível, um calendário para registar os dias de frequência na academia e muito mais!!",
+          subtitle: "O aplicativo conta com um sistema de check-in, sistema de busca de academias no seu radar, uma página de perfil com corpo interativo, um calendário para registrar os dias de frequência na academia e muito mais!!",
           subTitleStyles: {
             fontSize: 17,
             marginBottom: 100
@@ -84,11 +82,11 @@ export default function OnBoarding() {
                 loop
                 style={{ width: '100%', height: '540' }} />
             </View>),
-          title: "Esperamos que você aproveite o app!!",
+          title: "Aproveite o app!",
           titleStyles: {
             fontSize: 25
           },
-          subtitle: "O público alvo principal desse projeto são as pessoas interessadas em poder encontrar uma academia de forma simples, rápida e intuitiva.",
+          subtitle: "Desenvolvido para agradar usuários interessados em poder encontrar uma academia de forma simples, rápida e intuitiva.",
           subTitleStyles: {
             fontSize: 17,
             marginBottom: 100

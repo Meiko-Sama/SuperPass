@@ -1,7 +1,10 @@
 import { Text } from "react-native"
 
-export default function TextComp({ txt }) {
+// IMPORTAÇÃO STYLES
+import { styles } from "../styles/styles"
+
+export default function CadastroText({ txt }) {
   return (
-    <Text style={{ color: "white", top: 80, fontSize: 14, }}>{txt}</Text>
+    <Text style={styles.escrita}>{txt}</Text>
   )
 }
