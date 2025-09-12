@@ -8,6 +8,7 @@ import Perfil from "../pages/Perfil";
 import Home from "../pages/Home";
 import CheckIn from "../pages/CheckIn";
 import Login from "../pages/Login";
+import Cadastro from "../pages/Cadastro";
 
 // DECLARANDO STACK
 const Stack = createNativeStackNavigator();
@@ -70,11 +71,11 @@ export default function AppNavigation() {
     return (
       <NavigationContainer>
         <Stack.Navigator initialRouteName="OnBoarding">
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
           <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
           <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+          <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -86,9 +87,9 @@ export default function AppNavigation() {
       <Stack.Navigator initialRouteName="OnBoarding">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
         <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
         <Stack.Screen name="Perfil" component={Perfil} options={{ headerShown: false }} />
+        <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

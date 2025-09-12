@@ -1,100 +1,133 @@
 import { StatusBar } from 'expo-status-bar';
 import { Text, ImageBackground, TextInput, TouchableOpacity, View, Pressable } from 'react-native';
-
-//Importar icones
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-
-// Importação dos INPUTS
-import CadastroInput from '../components/CadastroInput';
-
-// IMPORTAÇÃO STYLES
 import { styles } from '../styles/styles';
-
-// IMPORTAÇÃO DO USE STATE
 import { useState } from 'react';
-
-// IMPORTAÇÃO NATIVE
 import { useNavigation } from '@react-navigation/native';
-import { setItem } from '../components/AsyncStorage';
-import CadastroText from '../components/CadastroText';
-import PressableInput from '../components/PressableInput';
-import OnBoarding from './OnBoarding';
+import axios from "axios";
 
+export default function Cadastro() {
+  // Inputs de texto
+  const [nome, setNome] = useState("");
+  const [idade, setIdade] = useState("");
+  const [altura, setAltura] = useState("");
+  const [peso, setPeso] = useState("");
+  const [loading, setLoading] = useState(false);
 
-// IMPORTAÇÃO DE ICONE
-// OMG HIIIII ><
-// import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
-export default function Login() {
-
-  const [btnEmagrecimento, setBtnEmagrecimento] = useState(false)
-  const [btnHipertrofia, setBtnHipertrofia] = useState(false)
-  const [btnSaudeGeral, setBtnSaudeGeral] = useState(false)
-  const [btnCondicionamentoFisico, setBtnCondicionamentoFisico] = useState(false)
-  const [btnFeminino, setBtnFeminino] = useState(false)
-  const [btnMasculino, setBtnMasculino] = useState(false)
+  // Botões de assinalar
+  const [btnEmagrecimento, setBtnEmagrecimento] = useState(false);
+  const [btnHipertrofia, setBtnHipertrofia] = useState(false);
+  const [btnSaudeGeral, setBtnSaudeGeral] = useState(false);
+  const [btnCondicionamento, setBtnCondicionamento] = useState(false);
+  const [btnFeminino, setBtnFeminino] = useState(false);
+  const [btnMasculino, setBtnMasculino] = useState(false);
 
   const navigation = useNavigation();
 
-  // FAZENDO FUNÇÃO DO BOTÃO ENVIAR PARA PAGINA HOME
-  const handleLogin = async () => {
-    await setItem("login", "1")
-    navigation.navigate("Home")
-  }
+  // Função de cadastro (integração com backend)
+  const handleRegister = async () => {
+    if (!nome || !idade || !altura || !peso) {
+      alert("Preencha todos os campos!!");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await axios.post("http://10.144.170.110:3001/auth/cadastro", {
+        nome,
+        idade,
+        altura,
+        peso,
+        objetivo: btnEmagrecimento
+          ? "emagrecimento"
+          : btnHipertrofia
+            ? "hipertrofia"
+            : btnSaudeGeral
+              ? "saude_geral"
+              : btnCondicionamento
+                ? "condicionamento"
+                : null,
+        genero: btnFeminino ? "feminino" : btnMasculino ? "masculino" : null,
+      });
+
+      alert(`Sucesso ao cadastrar: ${res.data.message}`);
+
+      // Limpar os campos
+      setNome("");
+      setIdade("");
+      setAltura("");
+      setPeso("");
+
+      // Redireciona pra Home
+      navigation.navigate("Home");
+    } catch (error) {
+      console.log("ERRO:", error.response?.data || error.message);
+      alert("Erro ao cadastrar!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <ImageBackground style={styles.containerForm}>
-
-      {/* NÃAAAAO CLICA NO ICONE ... POR ENQUANTO */}
       <View style={{ flexDirection: "row" }}>
-        <TouchableOpacity >
-          <FontAwesome name="arrow-circle-left" size={40} color='rgb(10, 146, 11)' onPress={OnBoarding} />
+        <TouchableOpacity>
+          <FontAwesome
+            name="arrow-circle-left"
+            size={40}
+            color="rgb(10, 146, 11)"
+            onPress={() => navigation.goBack()}
+          />
         </TouchableOpacity>
         <Text style={styles.title}>Página de Questionário</Text>
       </View>
+
       <View style={styles.pai}>
-        <View style={styles.titleSubtitle}>
+        {/* Inputs */}
+        <Text>Nome Completo:</Text>
+        <TextInput style={styles.input} value={nome} onChangeText={setNome} />
 
+        <Text>Idade:</Text>
+        <TextInput style={styles.input} value={idade} onChangeText={setIdade} />
 
-          <Text style={{ color: 'white', paddingTop: 20, fontSize: 15 }}>Questionário básico para melhorar a sua experiência:</Text>
-          <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 20, position: "absolute", top: 80, right: 110 }}>Informações pessoais:</Text>
-        </View>
-        {/* COMPONENTIZAÇÃO DOS INPUTS UTILIZADOS! */}
-        <View style={styles.escrita}>
-          <CadastroText txt="Nome Completo:" />
-          <CadastroInput />
+        <Text>Altura:</Text>
+        <TextInput style={styles.input} value={altura} onChangeText={setAltura} />
 
-          <CadastroText txt="Idade:" />
-          <CadastroInput />
+        <Text>Peso atual:</Text>
+        <TextInput style={styles.input} value={peso} onChangeText={setPeso} />
 
-          <CadastroText txt="Altura:" />
-          <CadastroInput />
+        {/* Objetivos */}
+        <Text>OBJETIVO PRINCIPAL:</Text>
+        <Pressable onPress={() => setBtnEmagrecimento(!btnEmagrecimento)}>
+          <Text>{btnEmagrecimento ? "🟢" : "⚪"} EMAGRECIMENTO</Text>
+        </Pressable>
+        <Pressable onPress={() => setBtnHipertrofia(!btnHipertrofia)}>
+          <Text>{btnHipertrofia ? "🟢" : "⚪"} HIPERTROFIA</Text>
+        </Pressable>
+        <Pressable onPress={() => setBtnSaudeGeral(!btnSaudeGeral)}>
+          <Text>{btnSaudeGeral ? "🟢" : "⚪"} SAÚDE GERAL</Text>
+        </Pressable>
+        <Pressable onPress={() => setBtnCondicionamento(!btnCondicionamento)}>
+          <Text>{btnCondicionamento ? "🟢" : "⚪"} CONDICIONAMENTO</Text>
+        </Pressable>
 
-          <CadastroText txt="Peso atual:" />
-          <CadastroInput />
-        </View>
+        {/* Gênero */}
+        <Text>PREFERÊNCIA DE CORPO:</Text>
+        <Pressable onPress={() => setBtnFeminino(!btnFeminino)}>
+          <Text>{btnFeminino ? "🟢" : "⚪"} FEMININO</Text>
+        </Pressable>
+        <Pressable onPress={() => setBtnMasculino(!btnMasculino)}>
+          <Text>{btnMasculino ? "🟢" : "⚪"} MASCULINO</Text>
+        </Pressable>
 
-        {/* INPUTS DE ASSINALAR 😭😭😭 */}
+        {/* Botão cadastrar */}
+        <TouchableOpacity onPress={handleRegister} disabled={loading} style={styles.btn}>
+          <Text>{loading ? "Cadastrando..." : "Cadastrar"}</Text>
+        </TouchableOpacity>
 
-        <View style={styles.objetivo}>
-          <Text style={styles.bolas}>Qual é o seu objetivo: </Text>
-          <PressableInput btn={btnEmagrecimento} setbtn={setBtnEmagrecimento} text="Emagrecimento" />
-          <PressableInput btn={btnHipertrofia} setbtn={setBtnHipertrofia} text="Hipertrofia" />
-          <PressableInput btn={btnSaudeGeral} setbtn={setBtnSaudeGeral} text="Saúde Geral" />
-          <PressableInput btn={btnCondicionamentoFisico} setbtn={setBtnCondicionamentoFisico} text="Condicionamento Físico" />
-        </View>
-
-        <View style={styles.genero}>
-          <Text style={styles.bolas}>Qual sua preferência de corpo: </Text>
-          <PressableInput btn={btnFeminino} setbtn={setBtnFeminino} text="Feminino" />
-          <PressableInput btn={btnMasculino} setbtn={setBtnMasculino} text="Masculino" />
-        </View>
-
+        <StatusBar hidden />
       </View>
-      <StatusBar hidden />
     </ImageBackground>
-
-
-
   );
 }
