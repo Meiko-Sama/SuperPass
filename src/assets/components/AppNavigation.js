@@ -14,18 +14,36 @@ import Codigo from "../pages/Codigo";
 // DECLARANDO STACK
 const Stack = createNativeStackNavigator();
 
+
+
 // ASYNC STORAGE
 import { getItem } from "./AsyncStorage";
-import Onboarding from "react-native-onboarding-swiper";
+
+// IMPORTAÇÃO DO ASYNC STORAGE
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   const [showFormulario, setShowFormulario] = useState(null);
+  const [showCadastro, setShowCadastro] = useState(null);
+
 
   // Checagem Onboarding
   useEffect(() => {
+    // Limpa os dados a cada rodada
+    const clearStorage = async () => {
+      try {
+        await AsyncStorage.clear();
+        console.log("AsyncStorage limpo!");
+      } catch (error) {
+        console.log("Erro ao limpar AsyncStorage:", error);
+      }
+    };
+
+    clearStorage()
     checkIfAlreadyOnboarded();
     checkIfAlreadyLoggedIn();
+    checkIfAlreadySignUp();
   }, []);
 
   const checkIfAlreadyOnboarded = async () => {
@@ -47,10 +65,18 @@ export default function AppNavigation() {
     }
   };
 
-  //
+  // Checagem cadastro
+  const checkIfAlreadySignUp = async () => {
+    let cadastro = await getItem("cadastro");
+    if (cadastro === "1") {
+      setShowCadastro(false);
+    } else {
+      setShowCadastro(true);
+    }
+  };
 
   // Se ainda não carregou os dados, retorna vazio
-  if (showOnboarding === null || setShowFormulario === null) {
+  if (showOnboarding === null || showCadastro === null || showFormulario === null) {
     return null;
   }
 
@@ -75,7 +101,7 @@ export default function AppNavigation() {
   if (showFormulario) {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Formulario">
+        <Stack.Navigator initialRouteName="Cadastro">
           <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
           <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
           <Stack.Screen name="CheckIn" component={CheckIn} options={{ headerShown: false }} />
