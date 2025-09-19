@@ -32,13 +32,6 @@ console.log("DB_NAME carregado:", process.env.DB_NAME);
 
 app.use(cors());
 
-// CORS DA WEB
-// const corsOptions = {
-//   origin: '*', // permite qualquer origem
-//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//   credentials: true
-// };
-
 app.use(express.json());
 
 // conexão com o banco MYSQL

@@ -34,7 +34,6 @@ export default function Cadastro() {
 
   const [visible, setVisible] = useState(false);
 
-  // ----------------------------------------------------------------------------
 
   const fetchProfile = async () => {
     setLoading(true);
@@ -120,42 +119,30 @@ export default function Cadastro() {
 
       {/* ALERT */}
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#111", }}>
-
-        {/* pergunta */}
         <TouchableOpacity>
-          <Text style={{ color: '#fff', paddingLeft: 225 }} onPress={handleCODIGOalert} > Não sabe o código?</Text>
+          <Text style={{ color: 'white', paddingLeft: 225 }} onPress={() => setVisible(true)} > Não sabe o código?</Text>
         </TouchableOpacity>
-
-        {/* Modal estilizado */}
         <Modal
           transparent
           animationType="fade"
           visible={visible}
           onRequestClose={() => setVisible(false)}
         >
-
-          {/* mensagem */}
-          <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>⚠ Atenção!</Text>
-          <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 20 }}>
-            Você precisa inserir um código válido.
-          </Text>
-
-          {/* botão de fechar alert */}
-          <View style={{ flexDirection: "row", gap: 10 }}>
-            <TouchableOpacity
-              style={{ flex: 1, padding: 12, borderRadius: 8, alignItems: "center", backgroundColor: "gray" }} onPress={() => handleCODIGOalert(false)}
-            >
-              <Text style={{ color: "white", fontWeight: "bold" }}>despacito</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={{ backgroundColor: "green", flex: 1, padding: 12, borderRadius: 8, alignItems: "center" }}
-              onPress={() => {
-                console.log("OK Pressionado");
-                setVisible(false);
-              }} >
-              <Text style={{ color: "white", fontWeight: "bold" }}>OK</Text>
-            </TouchableOpacity>
+          <View style={{ flex: 1, backgroundColor: "transparent", justifyContent: "center" }}>
+            <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>⚠ Atenção!</Text>
+            <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 20 }}>
+              Você precisa inserir um código válido.
+            </Text>
+            <View style={{ flexDirection: "row", gap: 10 }}>
+              <TouchableOpacity
+                style={{ backgroundColor: "green", flex: 1, padding: 12, borderRadius: 8, alignItems: "center" }}
+                onPress={() => {
+                  console.log("OK Pressionado");
+                  setVisible(false);
+                }} >
+                <Text style={{ color: "white", fontWeight: "bold" }}>OK</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Modal>
       </View>
