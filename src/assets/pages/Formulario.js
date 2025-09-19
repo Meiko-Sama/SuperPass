@@ -40,23 +40,23 @@ export default function Formulario() {
 
   // Redireciona para tela OnBoarding Novamente
   const goToOnBoarding = () => {
-    navigation.navigate('OnBoarding');
+    navigation.navigate('Codigo');
   };
 
   const handleFormulario = async () => {
-    if (!nome || !idade || !altura || !peso) {
+    if (
+      !nome || !idade || !altura || !peso || (!btnEmagrecimento && !btnHipertrofia && !btnSaudeGeral && !btnCondicionamento) || !btnPreferencia
+    ) {
       alert("Preencha todos os campos!!");
       return;
     }
+
 
     setLoading(true);
 
     try {
 
-      // Aqui envia para a tela de cadastro
-      navigation.navigate("Cadastro");
-
-      const res = await axios.post("http://10.144.170.110:8081/auth/Formulario", {
+      const res = await axios.post("http://localhost:3001/auth/Formulario", {
         nome,
         idade,
         altura,
@@ -65,18 +65,25 @@ export default function Formulario() {
         hipertrofia: btnHipertrofia ? 1 : 0,
         saude: btnSaudeGeral ? 1 : 0,
         condicionamento: btnCondicionamento ? 1 : 0,
-        preferencia: btnPreferencia
+        mulher: btnPreferencia === "feminino" ? 1 : 0,
+        homem: btnPreferencia === "masculino" ? 1 : 0
       });
 
       alert("Sucesso ao cadastrar!");
+
+      // Aqui envia para a tela de cadastro
+      navigation.navigate("Cadastro");
 
       // Limpa os campos
       setNome("");
       setIdade("");
       setAltura("");
       setPeso("");
-
-
+      setBtnEmagrecimento(false);
+      setBtnHipertrofia(false);
+      setBtnSaudeGeral(false);
+      setBtnCondicionamento(false);
+      setBtnPreferencia("");
 
     } catch (error) {
       console.log("ERRO:", error);

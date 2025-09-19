@@ -1,3 +1,12 @@
+// Teste para ver o motivo do NODE estar morrendo
+process.on("uncaughtException", (err) => {
+  console.error("❌ Erro não tratado:", err);
+});
+
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("❌ Promessa rejeitada sem catch:", reason);
+});
+
 // import express
 const express = require("express");
 
@@ -15,11 +24,21 @@ const bcrypt = require("bcrypt");
 // import jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-const PORT = 8081 // onde vai rodar o back-end
+const PORT = 3001 // onde vai rodar o back-end
 const app = express();
 
 dotenv.config();
+console.log("DB_NAME carregado:", process.env.DB_NAME);
+
 app.use(cors());
+
+// CORS DA WEB
+// const corsOptions = {
+//   origin: '*', // permite qualquer origem
+//   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+//   credentials: true
+// };
+
 app.use(express.json());
 
 // conexão com o banco MYSQL
@@ -30,30 +49,44 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
 })
 
+// Mostrar mensagem de erro se a conexão do BD funcionou ou não e o motivo dele
+async function conexaoDB() {
+  try {
+    const conn = await pool.getConnection();
+    console.log("✅ Conexão com MYSQL bem-sucedida!");
+    conn.release();
+  } catch (error) {
+    console.error("❌ Erro de conexão com MYSQL:", error);
+  }
+}
+conexaoDB();
+
 // rota: FORMULARIO
 app.post("/auth/Formulario", async (req, res) => {
+  console.log("📩 Body recebido:", req.body);
+
+  const {
+    nome, idade, altura, peso,
+    emagrecimento, hipertrofia, saude, condicionamento,
+    mulher, homem
+  } = req.body;
+
+  // Se algum campo estiver undefined
+  if ([nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem].some(v => v === undefined)) { // Esse .some(v => === undefined) serve para verificar se tem algum campo que pelo menos esta enviando um dado indefinido!
+    console.log("Algum campo está undefined");
+    return res.status(400).json({ error: "Algum campo está faltando" });
+  }
+
   try {
-    const { nome, idade, altura, peso
-    } = req.body;
-
-    // verificação dos campos
-    if (!nome || !idade || !altura || !peso) {
-      return res.status(400).json({ error: "Preencha todos os campos!" });
-    }
-
-    await pool.query(
-      "INSERT INTO info (nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+    const [result] = await pool.query(
+      "INSERT INTO info (nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem]
     );
-    console.log("REQ BODY:", req.body);
-
-
-    res.status(201).json({ message: "Formulário cadastrado com sucesso!" })
-
-    // mensagem de erro
+    console.log("✅ Inserido com sucesso:", result);
+    res.status(201).json({ message: "Formulário cadastrado com sucesso!" });
   } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: "Erro ao continuar." })
+    console.error("❌ Erro ao inserir:", error);
+    res.status(500).json({ error: "Erro ao continuar." });
   }
 });
 
@@ -89,6 +122,9 @@ app.post("/auth/Cadastro", async (req, res) => {
   }
 })
 
+console.log("Host:", process.env.DB_HOST);
+console.log("User:", process.env.DB_USER);
+
 // -------------- Devolução das informações para o usuário-----------
 // MIDDLEWARE ↪ intermediário entre a requisição e a respostas
 // Middleware:
@@ -120,6 +156,10 @@ async function conexaoDB() {
     console.log(`Error: ${error}`)
   }
 }
+
+app.get("/", (req, res) => {
+  res.send("Servidor acessível!");
+});
 
 // iniciando o servidor:
 app.listen(PORT, () => {
