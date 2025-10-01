@@ -87,55 +87,85 @@ export default function Cadastro() {
 
   return (
     <View style={[styles.containerForm, { padding: 20 }]}>
-      {/* LOGO */}
-      <Image source={require("../images/docinhomusculosa.png")} style={{ width: 50, height: 75, marginBottom: 2 }} />
 
-      {/* VOLTAR E TÍTULO */}
-      <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 25 }}>
+      <Image
+        source={require("../images/docinhomusculosa.png")}
+        style={{ width: 50, height: 75, marginBottom: 20, position: 'absolute', left: 20, top: 30 }}
+      />
+
+      <View style={{ flexDirection: "row", width: "100%", alignItems: "center", gap: 10, marginTop: 70 }}>
         <TouchableOpacity onPress={backToCad}>
-          <FontAwesome name="arrow-circle-left" size={40} color='rgb(10, 146, 11)' />
+          <FontAwesome name="arrow-circle-left" size={40} color="rgb(10, 146, 11)" />
         </TouchableOpacity>
-        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 25, marginLeft: 10, }}>Verificação de cadastro</Text>
+        <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25 }}>Verifique sua empresa</Text>
       </View>
 
-      {/* SUBTÍTULO E INPUT */}
-      <View style={{ marginBottom: 20 }}>
-        <Text style={{ color: 'white', fontSize: 25, marginBottom: 30, textAlign: "center" }}>Cadastre-se com o código fornecido pela sua empresa!</Text>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <Text style={{ color: "#fff", fontSize: 18, textAlign: "center", marginBottom: 10, marginTop: 5 }}>
+        Cadastre-se com o código fornecido pela sua empresa!
+      </Text>
+
+
+      <View style={{ position: 'relative', flex: 1, justifyContent: "center" }}>
+        <View style={{ marginTop: 25, justifyContent: "center", alignItems: "center" }}>
           <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 18, marginBottom: 5 }}>Código de acesso</Text>
           <TextInput
+            placeholder="Buscar empresa..."
+            placeholderTextColor={"#aaa"}
             style={{
-              width: "80%",
-              height: 45,
-              borderWidth: 2,
-              borderColor: "rgb(10, 146, 11)",
+              color: "white",
+              backgroundColor: "#262626",
+              height: 50,
               borderRadius: 20,
-              paddingHorizontal: 10,
-              color: "white"
+              marginHorizontal: 20,
+              paddingLeft: 15,
+              width: "80%"
             }}
           />
+
+          <TouchableOpacity style={{ position: 'absolute', bottom: -25, right: 0 }}>
+            <Text style={{ color: 'white' }} onPress={() => setVisible(true)} > Não sabe o código?</Text>
+          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            backgroundColor: "green",
+            borderRadius: 30,
+            justifyContent: "center",
+            alignItems: "center",
+            marginTop: 150
+          }}
+          onPress={goToFormulario}
+        >
+          <Text style={{ color: "white", fontSize: 16, }}>Seguir para FORMULÁRIO</Text>
+        </TouchableOpacity>
       </View>
 
+      {/* BOTÃO */}
+      <View style={{ width: "80%", alignSelf: "center", marginTop: 75 }}>
+
+      </View>
+
+
+
+
       {/* ALERT */}
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#111", }}>
-        <TouchableOpacity>
-          <Text style={{ color: 'white', paddingLeft: 225 }} onPress={() => setVisible(true)} > Não sabe o código?</Text>
-        </TouchableOpacity>
-        <Modal
-          transparent
-          animationType="fade"
-          visible={visible}
-          onRequestClose={() => setVisible(false)}
-        >
-          <View style={{ flex: 1, backgroundColor: "transparent", justifyContent: "center" }}>
+      <Modal
+        animationType="fade"
+        visible={visible}
+        onRequestClose={() => setVisible(false)}
+      >
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", }}>
+
+          <View style={{ flex: 1, backgroundColor: "rgba(255, 255, 255, 0.6)", justifyContent: "center", alignItems: "center" }}>
+
             <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>⚠ Atenção!</Text>
-            <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 20 }}>
-              Você precisa inserir um código válido.
+            <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 180, marginLeft: 40, marginRight: 40 }}>
+              Você pode conseguir um código válido com o RH da sua empresa.
             </Text>
             <View style={{ flexDirection: "row", gap: 10 }}>
               <TouchableOpacity
-                style={{ backgroundColor: "green", flex: 1, padding: 12, borderRadius: 8, alignItems: "center" }}
+                style={{ backgroundColor: "green", flex: 1, padding: 12, borderRadius: 90, alignItems: "center", marginLeft: 50, marginRight: 50 }}
                 onPress={() => {
                   console.log("OK Pressionado");
                   setVisible(false);
@@ -144,25 +174,10 @@ export default function Cadastro() {
               </TouchableOpacity>
             </View>
           </View>
-        </Modal>
-      </View>
-      );
+        </View>
+      </Modal>
 
-      {/* BOTÃO */}
-      <View style={{ marginTop: 280, width: "80%", alignSelf: "center" }}>
-        <TouchableOpacity
-          style={{
-            height: 50,
-            backgroundColor: "green",
-            borderRadius: 30,
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-          onPress={goToFormulario}
-        >
-          <Text style={{ color: "white", fontSize: 16 }}>Seguir para FORMULÁRIO</Text>
-        </TouchableOpacity>
-      </View>
+
     </View >
   );
 }

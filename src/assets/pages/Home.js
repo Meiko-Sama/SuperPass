@@ -34,18 +34,19 @@ export default function Home() {
 
 
   return (
-    <ImageBackground style={styles.container} source={require("../images/docinhomusculosa.png")}>
-
-
-      <Text style={{ color: "white", fontSize: 25, fontWeight: "bold" }}> BEM VINDO A TELA HOME! </Text>
-      <Text style={{ color: "white", fontSize: 15 }}> O que deseja fazer?</Text>
-
-
-      {/* TEORICAMENTE AQUI É ONDE O REMOVE ITEM DEVE FICAR */}
-      <TouchableOpacity onPress={handleReset} style={styles.resetBTN}>
-        <Text style={{ color: "white", fontSize: 15, fontWeight: "bold" }}>SAIR</Text>
-      </TouchableOpacity>
-
-    </ImageBackground>
+    <View style={styles.containerForm}>
+      <Image source={require("../images/docinhomusculosa.png")} style={{ width: 50, height: 75 }} />
+      <View style={{ flexDirection: "row", width: "100%", height: "10%", alignItems: "center", gap: 10, top: -40 }}>
+        <TouchableOpacity>
+          <FontAwesome name="arrow-circle-left" size={40} color='rgb(10, 146, 11)' onPress={goToOnBoarding} />
+        </TouchableOpacity>
+        <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 25 }}>Página de Questionário</Text>
+      </View>
+    </View>
   );
 }
+
+// OI SARAH!!!! （。＾▽＾）:D
+// oieeeeee ❤
+
+// :P

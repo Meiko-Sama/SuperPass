@@ -56,7 +56,7 @@ export default function Formulario() {
 
     try {
 
-      const res = await axios.post("http://localhost:3001/auth/Formulario", {
+      const res = await axios.post("http://10.144.170.45:3001/auth/Formulario", {
         nome,
         idade,
         altura,
@@ -93,6 +93,10 @@ export default function Formulario() {
     }
   };
 
+  const btnEnviaDireto = () => {
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={styles.containerForm}>
       <Image source={require("../images/docinhomusculosa.png")} style={{ width: 50, height: 75 }} />
@@ -115,7 +119,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -134,7 +138,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -152,7 +156,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -170,7 +174,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -215,11 +219,26 @@ export default function Formulario() {
           </TouchableOpacity>
         </View>
 
-        {/* Você consegue Sarah!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-        {/* obrigada 😭 */}
+        {/* BOTÃO que envia direto */}
+        <View style={{
+          backgroundColor: '#fff'
+        }}>
+          <TouchableOpacity onPress={btnEnviaDireto} style={{
+            backgroundColor: '#fff',
+            height: 50,
+            width: 80,
+            bottom: 120
+          }}>
+            <Text style={{ color: '#000' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
       <StatusBar hidden />
     </View>
   );
 }
 
+// vai ser dificil arrumar aqui :v
+// omg
+// :P
