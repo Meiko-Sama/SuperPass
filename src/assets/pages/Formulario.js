@@ -55,8 +55,8 @@ export default function Formulario() {
     setLoading(true);
 
     try {
-
-      const res = await axios.post("http://localhost:3001/auth/Formulario", {
+      // ("http://:3001/auth/Formulario", PELO CELULAR
+      const res = await axios.post("http://10.144.170.45:3001/auth/Formulario", {
         nome,
         idade,
         altura,
@@ -69,21 +69,26 @@ export default function Formulario() {
         homem: btnPreferencia === "masculino" ? 1 : 0
       });
 
-      alert("Sucesso ao cadastrar!");
+      console.log(res.data)
 
-      // Aqui envia para a tela de cadastro
-      navigation.navigate("Cadastro");
+      console.log("UHDAWUDHWUHDUAWHDUWAH")
 
-      // Limpa os campos
-      setNome("");
-      setIdade("");
-      setAltura("");
-      setPeso("");
-      setBtnEmagrecimento(false);
-      setBtnHipertrofia(false);
-      setBtnSaudeGeral(false);
-      setBtnCondicionamento(false);
-      setBtnPreferencia("");
+      // console.log(res)
+      // alert("Sucesso ao cadastrar!");
+
+      // // Aqui envia para a tela de cadastro
+      // navigation.navigate("Cadastro");
+
+      // // Limpa os campos
+      // setNome("");
+      // setIdade("");
+      // setAltura("");
+      // setPeso("");
+      // setBtnEmagrecimento(false);
+      // setBtnHipertrofia(false);
+      // setBtnSaudeGeral(false);
+      // setBtnCondicionamento(false);
+      // setBtnPreferencia("");
 
     } catch (error) {
       console.log("ERRO:", error);
@@ -93,21 +98,30 @@ export default function Formulario() {
     }
   };
 
+  const btnEnviaDireto = () => {
+    navigation.navigate('Home');
+  };
+
   return (
     <View style={styles.containerForm}>
-      <Image source={require("../images/docinhomusculosa.png")} style={{ width: 50, height: 75 }} />
-      <View style={{ flexDirection: "row", width: "100%", height: "10%", alignItems: "center", gap: 10, top: -40 }}>
+      <Image
+        source={require("../images/docinhomusculosa.png")}
+        style={{ width: 50, height: 75, marginBottom: 20, position: 'absolute', left: 20, top: 5 }}
+      />
+      <View style={{ flexDirection: "row", width: "100%", height: "10%", alignItems: "center", gap: 10, top: 30 }}>
         <TouchableOpacity>
           <FontAwesome name="arrow-circle-left" size={40} color='rgb(10, 146, 11)' onPress={goToOnBoarding} />
         </TouchableOpacity>
         <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 25 }}>Página de Questionário</Text>
       </View>
+
+      <Text style={{ color: "#fff", fontSize: 17, marginTop: 15 }}>Questionário para aprimorar sua experiência!</Text>
+
       <View style={{
         width: "100%",
         height: "100%",
-        top: -40,
       }}>
-        <Text style={{ color: "#fff", fontSize: 17 }}>Questionário para aprimorar sua experiência!</Text>
+
 
         <View style={{ width: "100%", flexDirection: "row", alignItems: "center", marginTop: 15 }}>
           <Text style={{ color: "#fff", width: "16%", fontSize: 18, fontStyle: "italic" }}>Nome:</Text>
@@ -115,7 +129,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -134,7 +148,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -152,7 +166,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -170,7 +184,7 @@ export default function Formulario() {
             style={{
               paddingLeft: 10,
               color: 'white',
-              height: 35,
+              height: 45,
               borderWidth: 1,
               borderColor: 'rgb(10, 146, 11)',
               width: "72%",
@@ -215,11 +229,25 @@ export default function Formulario() {
           </TouchableOpacity>
         </View>
 
-        {/* Você consegue Sarah!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-        {/* obrigada 😭 */}
+        {/* BOTÃO que envia direto */}
+        <View style={{
+        }}>
+          <TouchableOpacity onPress={btnEnviaDireto} style={{
+            backgroundColor: '#fff',
+            height: 50,
+            width: 80,
+            bottom: 120
+          }}>
+            <Text style={{ color: '#000' }}>Home</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
       <StatusBar hidden />
     </View>
   );
 }
 
+// vai ser dificil arrumar aqui :v
+// omg
+// :P

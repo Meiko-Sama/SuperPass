@@ -24,7 +24,9 @@ const bcrypt = require("bcrypt");
 // import jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-const PORT = 3001 // onde vai rodar o back-end
+const PORT = 3001 // onde vai rodar o back-end NO CELULAR
+
+
 const app = express();
 
 dotenv.config();
@@ -56,21 +58,23 @@ conexaoDB();
 
 // rota: FORMULARIO
 app.post("/auth/Formulario", async (req, res) => {
-  console.log("📩 Body recebido:", req.body);
-
-  const {
-    nome, idade, altura, peso,
-    emagrecimento, hipertrofia, saude, condicionamento,
-    mulher, homem
-  } = req.body;
-
-  // Se algum campo estiver undefined
-  if ([nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem].some(v => v === undefined)) { // Esse .some(v => === undefined) serve para verificar se tem algum campo que pelo menos esta enviando um dado indefinido!
-    console.log("Algum campo está undefined");
-    return res.status(400).json({ error: "Algum campo está faltando" });
-  }
-
   try {
+
+    console.log("📩 Body recebido:", req.body);
+
+    const {
+      nome, idade, altura, peso,
+      emagrecimento, hipertrofia, saude, condicionamento,
+      mulher, homem
+    } = req.body;
+
+    console.log(nome, idade, peso)
+
+    // Se algum campo estiver undefined
+    if ([nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem].some(v => v === undefined)) { // Esse .some(v => === undefined) serve para verificar se tem algum campo que pelo menos esta enviando um dado indefinido!
+      console.log("Algum campo está undefined");
+      return res.status(400).json({ error: "Algum campo está faltando" });
+    }
     const [result] = await pool.query(
       "INSERT INTO info (nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem]
