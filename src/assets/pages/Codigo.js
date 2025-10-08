@@ -8,6 +8,8 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import OnBoarding from './OnBoarding';
 import { useNavigation } from '@react-navigation/native';
 
+import { BlurView } from 'expo-blur';
+
 export default function Cadastro() {
 
   const [loading, setLoading] = useState(false);
@@ -34,37 +36,36 @@ export default function Cadastro() {
 
   const [visible, setVisible] = useState(false);
 
-
   const fetchProfile = async () => {
     setLoading(true);
     try {
       const token = await AsyncStorage.getItem("@token");
       if (!token) {
-        alert("Erro! Você não está logado.")
-        setLoading(false)
+        alert("Erro! Você não está logado.");
+        setLoading(false);
         return;
       }
 
       const res = await axios.get("http://10.144.170.110:8081/auth/profile", {
         headers: { Authorization: `Bearer ${token}` }
-      })
+      });
 
       setNome(res.data.user.nome);
       setEmail(res.data.user.email);
 
     } catch (error) {
-      console.log("ERRO:", error)
+      console.log("ERRO:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   const handleUpdate = async () => {
     try {
       const token = await AsyncStorage.getItem("@token");
 
       if (!token) {
-        alert("Erro! você não está logado")
+        alert("Erro! você não está logado");
         setLoading(false);
         return;
       }
@@ -75,15 +76,13 @@ export default function Cadastro() {
         headers: {
           "Content-Type": "application/json", Authorization: `Bearer ${token}`
         }
-      })
+      });
 
     } catch (error) {
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
-
-  // VOCE CONSEGUE SASHA (☞ﾟヮﾟ)☞ ο(=•ω＜=)ρ
+  };
 
   return (
     <View style={[styles.containerForm, { padding: 20 }]}>
@@ -104,8 +103,7 @@ export default function Cadastro() {
         Cadastre-se com o código fornecido pela sua empresa!
       </Text>
 
-
-      <View style={{ position: 'relative', flex: 1, justifyContent: "center" }}>
+      <View style={{ position: 'relative', flex: 1, marginTop: 70 }}>
         <View style={{ marginTop: 25, justifyContent: "center", alignItems: "center" }}>
           <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 18, marginBottom: 5 }}>Código de acesso</Text>
           <TextInput
@@ -122,65 +120,57 @@ export default function Cadastro() {
             }}
           />
 
-          <TouchableOpacity style={{ position: 'absolute', bottom: -25, right: 0 }}>
+          <TouchableOpacity style={{ position: 'absolute', bottom: -30, right: 20 }}>
             <Text style={{ color: 'white' }} onPress={() => setVisible(true)} > Não sabe o código?</Text>
           </TouchableOpacity>
         </View>
+
         <TouchableOpacity
           style={{
-            height: 50,
+            padding: 20,
+            width: 350,
+            marginLeft: 15,
             backgroundColor: "green",
             borderRadius: 30,
-            justifyContent: "center",
-            alignItems: "center",
-            marginTop: 150
+            marginTop: 250,
+            alignItems: "center"
           }}
           onPress={goToFormulario}
         >
-          <Text style={{ color: "white", fontSize: 16, }}>Seguir para FORMULÁRIO</Text>
+          <Text style={{ color: "white", fontSize: 16 }}>Seguir para FORMULÁRIO</Text>
         </TouchableOpacity>
       </View>
 
-      {/* BOTÃO */}
-      <View style={{ width: "80%", alignSelf: "center", marginTop: 75 }}>
-
-      </View>
-
-
-
-
-      {/* ALERT */}
+      {/* ALERT COM BLURVIEW */}
       <Modal
         animationType="fade"
         visible={visible}
         onRequestClose={() => setVisible(false)}
+        transparent={true}
       >
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", }}>
-
-          <View style={{ flex: 1, backgroundColor: "rgba(255, 255, 255, 0.6)", justifyContent: "center", alignItems: "center" }}>
-
-            <Text style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}>⚠ Atenção!</Text>
-            <Text style={{ fontSize: 16, textAlign: "center", marginBottom: 180, marginLeft: 40, marginRight: 40 }}>
-              Você pode conseguir um código válido com o RH da sua empresa.
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
+          <View style={{
+            width: "80%",
+            height: "25%",
+            borderRadius: 20,
+            backgroundColor: 'green',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingHorizontal: 40,
+          }}>
+            <Text style={{ fontSize: 18, marginBottom: 15, textAlign: "center", color: "#000" }}>
+              Você pode pedir um código para o RH da sua empresa.
             </Text>
-            <View style={{ flexDirection: "row", gap: 10 }}>
-              <TouchableOpacity
-                style={{ backgroundColor: "green", flex: 1, padding: 12, borderRadius: 90, alignItems: "center", marginLeft: 50, marginRight: 50 }}
-                onPress={() => {
-                  console.log("OK Pressionado");
-                  setVisible(false);
-                }} >
-                <Text style={{ color: "white", fontWeight: "bold" }}>OK</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={{ backgroundColor: "#000", paddingVertical: 10, paddingHorizontal: 30, borderRadius: 20, marginTop: 15 }}
+              onPress={() => setVisible(false)}
+            >
+              <Text style={{ color: 'white', fontSize: 16 }}>Fechar</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </Modal>
-
-
-    </View >
+      <StatusBar hidden />
+    </View>
   );
 }
-
-
-
