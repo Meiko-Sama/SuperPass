@@ -3,8 +3,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { TabBar } from "./TabBar";
-
 // IMPORTANDO PÁGINAS
 import OnBoarding from "../pages/OnBoarding";
 import Perfil from "../pages/Perfil";

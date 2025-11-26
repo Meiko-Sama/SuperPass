@@ -15,6 +15,7 @@ export default function Cadastro() {
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [codigo, setCodigo] = useState("");
 
   const navigation = useNavigation();
   // BOTÃO PARA O FORMULÁRIO
@@ -46,7 +47,7 @@ export default function Cadastro() {
         return;
       }
 
-      const res = await axios.get("http://10.144.170.110:8081/auth/profile", {
+      const res = await axios.get("http://10.144.170.56:8082/auth/profile", {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -75,7 +76,7 @@ export default function Cadastro() {
         return;
       }
 
-      const res = await axios.put("http://10.144.170.110:8081/auth/update", {
+      const res = await axios.put("http://10.144.170.56:8082/auth/update", {
         nome, email
       }, {
         headers: {
@@ -88,6 +89,32 @@ export default function Cadastro() {
       setLoading(false);
     }
   };
+
+  // Validação codigo
+
+  const validarCodigo = async () => {
+    try {
+      if (!codigo.trim()) {
+        alert("Digite um código!");
+        return;
+      }
+
+      const res = await axios.post("http://10.144.170.56:8082/auth/verificarCodigo", {
+        codigo
+      });
+
+      if (res.data.valid) {
+        navigation.navigate("Formulario");
+      } else {
+        alert("Código inválido!");
+      }
+
+    } catch (error) {
+      alert("Erro ao validar o código.");
+      console.log("Erro:", error);
+    }
+  };
+
 
   return (
     <View style={[styles.containerForm, { padding: 20 }]}>
@@ -112,8 +139,10 @@ export default function Cadastro() {
         <View style={{ marginTop: 25, justifyContent: "center", alignItems: "center" }}>
           <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 18, marginBottom: 5 }}>Código de acesso</Text>
           <TextInput
-            placeholder="Buscar empresa..."
-            placeholderTextColor={"#aaa"}
+            placeholder="Digite o código..."
+            placeholderTextColor="#aaa"
+            value={codigo}
+            onChangeText={setCodigo}
             style={{
               color: "white",
               backgroundColor: "#262626",
@@ -137,7 +166,7 @@ export default function Cadastro() {
             marginLeft: 15,
             backgroundColor: "green",
             borderRadius: 30,
-            marginTop: 250,
+            marginTop: 350,
             alignItems: "center"
           }}
           onPress={goToFormulario}
@@ -164,7 +193,7 @@ export default function Cadastro() {
             paddingHorizontal: 40,
           }}>
             <Text style={{ fontSize: 18, marginBottom: 15, textAlign: "center", color: "#000" }}>
-              Você pode pedir um código para o RH da sua empresa.
+              Verifique com o RH da sua empresa, para que disponibilizem seu código de acesso.
             </Text>
             <TouchableOpacity
               style={{ backgroundColor: "#000", paddingVertical: 10, paddingHorizontal: 30, borderRadius: 20, marginTop: 15 }}
@@ -179,14 +208,7 @@ export default function Cadastro() {
 
       <View style={{
       }}>
-        <TouchableOpacity onPress={btnEnvia} style={{
-          backgroundColor: '#fff',
-          height: 50,
-          width: 80,
-          bottom: 120
-        }}>
-          <Text style={{ color: '#000' }}>TelaInicial</Text>
-        </TouchableOpacity>
+
       </View>
       <StatusBar hidden />
     </View>

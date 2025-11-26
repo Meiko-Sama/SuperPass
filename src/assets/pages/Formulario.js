@@ -56,7 +56,7 @@ export default function Formulario() {
 
     try {
       // ("http://:3001/auth/Formulario", PELO CELULAR
-      const res = await axios.post("http://10.144.170.45:3001/auth/Formulario", {
+      const res = await axios.post("http://10.144.170.56:8081/auth/Formulario", {
         nome,
         idade,
         altura,
@@ -98,12 +98,16 @@ export default function Formulario() {
     }
   };
 
-  const btnEnviaDireto = () => {
-    navigation.navigate('Home');
-  };
-
   const btnEnviaDiretoCheckin = () => {
     navigation.navigate('CheckIn');
+  };
+
+  const btnEnviaDiretoPerfil = () => {
+    navigation.navigate('Perfil')
+  };
+
+  const btnEnviaDireto = () => {
+    navigation.navigate('Home');
   };
 
 
@@ -227,10 +231,36 @@ export default function Formulario() {
           <Text style={{ marginLeft: 140, color: 'white', margin: 8 }}>{btnPreferencia === "masculino" ? "🟢" : "⚪"} MASCULINO</Text>
         </Pressable>
 
+        <View style={{
+        }}>
+          <TouchableOpacity onPress={btnEnviaDiretoCheckin} style={{
+            backgroundColor: '#fff',
+            height: 50,
+            width: 80,
+            bottom: 120
+          }}>
+            <Text style={{ color: '#000' }}>CheckIn</Text>
+          </TouchableOpacity>
+        </View>
+
+
         {/* BOTÃO */}
         <View style={styles.paiDoBtn}>
           <TouchableOpacity onPress={handleFormulario} disabled={loading} style={styles.btnCadastro}>
             <Text style={styles.textinho}>{loading ? "Carregando..." : "Seguir"}</Text>
+          </TouchableOpacity>
+        </View>
+
+
+        <View style={{
+        }}>
+          <TouchableOpacity onPress={btnEnviaDiretoPerfil} style={{
+            backgroundColor: '#fff',
+            height: 50,
+            width: 80,
+            bottom: 120
+          }}>
+            <Text style={{ color: '#000' }}>Perfil</Text>
           </TouchableOpacity>
         </View>
 
@@ -247,17 +277,8 @@ export default function Formulario() {
           </TouchableOpacity>
         </View>
 
-        <View style={{
-        }}>
-          <TouchableOpacity onPress={btnEnviaDiretoCheckin} style={{
-            backgroundColor: '#fff',
-            height: 50,
-            width: 80,
-            bottom: 120
-          }}>
-            <Text style={{ color: '#000' }}>CheckIn</Text>
-          </TouchableOpacity>
-        </View>
+
+
 
 
       </View>

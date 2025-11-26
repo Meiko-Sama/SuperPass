@@ -1,22 +1,11 @@
-
-import { StatusBar, Text, ImageBackground, TouchableOpacity, View, Image, } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import OnBoarding from './OnBoarding';
-import { styles } from '../styles/styles';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // IMPORTAÇÃO DO NAVIGATION
 import { useNavigation } from '@react-navigation/native';
 
 import Carousel from '../components/Carousel';
 
-//IMPORTAÇÃO DO ASYNC STORAGE
-import { removeItem } from '../components/AsyncStorage';
 
-//IMPORTAÇÃO PAGINA GALERIA
-
-// IMPORTAÇÃO DE ICONE
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function Home() {
 

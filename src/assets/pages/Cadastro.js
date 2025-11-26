@@ -72,9 +72,7 @@ export default function Cadastro() {
       />
 
       <View style={{ flexDirection: "row", width: "100%", alignItems: "center", gap: 10, marginTop: 70 }}>
-        <TouchableOpacity>
-          <FontAwesome name="arrow-circle-left" size={40} color="rgb(10, 146, 11)" />
-        </TouchableOpacity>
+
         <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25 }}>Verifique sua empresa</Text>
       </View>
 

@@ -24,8 +24,7 @@ const bcrypt = require("bcrypt");
 // import jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-const PORT = 3001 // onde vai rodar o back-end NO CELULAR
-
+const PORT = 8082 // onde vai rodar o back-end NO CELULAR
 
 const app = express();
 
@@ -119,6 +118,34 @@ app.post("/auth/Cadastro", async (req, res) => {
   }
 })
 
+//rota: verificarCODIGO
+
+// app.post("/auth/verificarCodigo", async (req, res) => {
+//   try {
+//     const { codigo } = req.body;
+
+//     if (!codigo) {
+//       return res.status(400).json({ error: "Código não enviado!" });
+//     }
+
+//     const [rows] = await pool.query(
+//       "SELECT * FROM codigos WHERE codigo = ?",
+//       [codigo]
+//     );
+
+//     if (rows.length === 0) {
+//       return res.status(404).json({ valid: false, error: "Código inválido!" });
+//     }
+
+//     return res.json({ valid: true, message: "Código válido!" });
+
+//   } catch (error) {
+//     console.log("Erro:", error);
+//     return res.status(500).json({ error: "Erro ao verificar código" });
+//   }
+// });
+
+
 console.log("Host:", process.env.DB_HOST);
 console.log("User:", process.env.DB_USER);
 
@@ -142,16 +169,6 @@ function autenticarToken(req, res, next) {
     req.user = user;
     next();
   })
-}
-
-async function conexaoDB() {
-  try {
-    const conn = await pool.getConnection();
-    console.log("Conexão com MYSQL bem-sucedida!");
-    conn.release();
-  } catch (error) {
-    console.log(`Error: ${error}`)
-  }
 }
 
 app.get("/", (req, res) => {

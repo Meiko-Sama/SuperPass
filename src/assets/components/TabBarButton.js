@@ -4,6 +4,8 @@ import { icon } from "../../constants/icon";
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 import { useEffect } from "react";
 
+
+
 export default function TabBarButton({
   onPress,
   onLongPress,
