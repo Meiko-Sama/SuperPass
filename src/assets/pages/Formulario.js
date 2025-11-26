@@ -102,6 +102,11 @@ export default function Formulario() {
     navigation.navigate('Home');
   };
 
+  const btnEnviaDiretoCheckin = () => {
+    navigation.navigate('CheckIn');
+  };
+
+
   return (
     <View style={styles.containerForm}>
       <Image
@@ -241,6 +246,19 @@ export default function Formulario() {
             <Text style={{ color: '#000' }}>Home</Text>
           </TouchableOpacity>
         </View>
+
+        <View style={{
+        }}>
+          <TouchableOpacity onPress={btnEnviaDiretoCheckin} style={{
+            backgroundColor: '#fff',
+            height: 50,
+            width: 80,
+            bottom: 120
+          }}>
+            <Text style={{ color: '#000' }}>CheckIn</Text>
+          </TouchableOpacity>
+        </View>
+
 
       </View>
       <StatusBar hidden />

@@ -60,6 +60,11 @@ export default function Cadastro() {
     }
   };
 
+  const btnEnvia = () => {
+    navigation.navigate('TelaInicial');
+  };
+
+
   const handleUpdate = async () => {
     try {
       const token = await AsyncStorage.getItem("@token");
@@ -169,7 +174,20 @@ export default function Cadastro() {
             </TouchableOpacity>
           </View>
         </View>
+
       </Modal>
+
+      <View style={{
+      }}>
+        <TouchableOpacity onPress={btnEnvia} style={{
+          backgroundColor: '#fff',
+          height: 50,
+          width: 80,
+          bottom: 120
+        }}>
+          <Text style={{ color: '#000' }}>TelaInicial</Text>
+        </TouchableOpacity>
+      </View>
       <StatusBar hidden />
     </View>
   );
