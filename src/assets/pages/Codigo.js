@@ -12,17 +12,18 @@ import { BlurView } from 'expo-blur';
 
 export default function Cadastro() {
 
+
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [codigo, setCodigo] = useState("");
 
-  const navigation = useNavigation();
-  // BOTÃO PARA O FORMULÁRIO
   const backToCad = () => {
     navigation.navigate('Cadastro');
   };
 
+  // BOTÃO PARA O FORMULÁRIO
   const goToFormulario = () => {
     navigation.navigate('Formulario');
   };
@@ -99,7 +100,7 @@ export default function Cadastro() {
         return;
       }
 
-      const res = await axios.post("http://10.144.170.56:8082/auth/verificarCodigo", {
+      const res = await axios.post("http://10.144.170.38:8082/auth/verificarCodigo", {
         codigo
       });
 
@@ -169,7 +170,7 @@ export default function Cadastro() {
             marginTop: 350,
             alignItems: "center"
           }}
-          onPress={goToFormulario}
+          onPress={validarCodigo}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Seguir para FORMULÁRIO</Text>
         </TouchableOpacity>

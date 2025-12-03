@@ -9,6 +9,10 @@ import CadastroText from '../components/CadastroText';
 import OnBoarding from './OnBoarding';
 import axios from "axios";
 
+// ARMAZENAR ID LOCALMENTE
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
 export default function Formulario() {
 
   const [btnEmagrecimento, setBtnEmagrecimento] = useState(false);
@@ -56,7 +60,7 @@ export default function Formulario() {
 
     try {
       // ("http://:3001/auth/Formulario", PELO CELULAR
-      const res = await axios.post("http://10.144.170.56:8081/auth/Formulario", {
+      const res = await axios.post("http://10.144.170.56:8082/auth/Formulario", {
         nome,
         idade,
         altura,
@@ -68,6 +72,12 @@ export default function Formulario() {
         mulher: btnPreferencia === "feminino" ? 1 : 0,
         homem: btnPreferencia === "masculino" ? 1 : 0
       });
+
+      // GUARDA O ID DO CLIENTE NA MEMÓRIA DO CELULAR
+      await AsyncStorage.setItem("id", String(res.data.id));
+
+      navigation.navigate("Home");
+
 
       console.log(res.data)
 

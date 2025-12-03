@@ -17,6 +17,8 @@ export default function CheckIn() {
     setTimeout(() => setStatus("confirmado"), 4000);
   }, []);
 
+  const navigation = useNavigation();
+
   const backToHome = () => {
     navigation.navigate('Home');
   };
