@@ -51,6 +51,7 @@ export default function AppNavigation() {
 
   const checkIfAlreadyOnboarded = async () => {
     let onboarded = await getItem("onboarded");
+    console.log("ONBOARDED", onboarded)
     if (onboarded === "1") {
       setShowOnboarding(false);
     } else {
@@ -61,6 +62,7 @@ export default function AppNavigation() {
   // Checagem cadastro
   const checkIfAlreadyLoggedIn = async () => {
     let formulario = await getItem("formulario");
+    console.log("FORMULARIO", formulario)
     if (formulario === "1") {
       setShowFormulario(false);
     } else {
@@ -71,6 +73,7 @@ export default function AppNavigation() {
   // Checagem cadastro
   const checkIfAlreadySignUp = async () => {
     let cadastro = await getItem("cadastro");
+    console.log("CADASTRO", cadastro)
     if (cadastro === "1") {
       setShowCadastro(false);
     } else {

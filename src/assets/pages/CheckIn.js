@@ -34,7 +34,7 @@ export default function CheckIn() {
         <TouchableOpacity onPress={backToHome}>
           <FontAwesome name="arrow-circle-left" size={40} color="rgb(10, 146, 11)" style={{ marginLeft: 10 }} />
         </TouchableOpacity>
-        <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25, fontWeight: '900' }}>Check-in</Text>
+        <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25, }}>Check-in</Text>
       </View>
 
       <View style={styles.txtInicial}>
