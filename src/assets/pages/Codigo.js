@@ -10,7 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import { BlurView } from 'expo-blur';
 
-export default function Cadastro() {
+export default function Codigo() {
 
 
   const navigation = useNavigation();
@@ -38,71 +38,19 @@ export default function Cadastro() {
 
   const [visible, setVisible] = useState(false);
 
-  const fetchProfile = async () => {
-    setLoading(true);
-    try {
-      const token = await AsyncStorage.getItem("@token");
-      if (!token) {
-        alert("Erro! Você não está logado.");
-        setLoading(false);
-        return;
-      }
-
-      const res = await axios.get("http://10.144.170.56:8082/auth/profile", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      setNome(res.data.user.nome);
-      setEmail(res.data.user.email);
-
-    } catch (error) {
-      console.log("ERRO:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const btnEnvia = () => {
     navigation.navigate('TelaInicial');
-  };
-
-
-  const handleUpdate = async () => {
-    try {
-      const token = await AsyncStorage.getItem("@token");
-
-      if (!token) {
-        alert("Erro! você não está logado");
-        setLoading(false);
-        return;
-      }
-
-      const res = await axios.put("http://10.144.170.56:8082/auth/update", {
-        nome, email
-      }, {
-        headers: {
-          "Content-Type": "application/json", Authorization: `Bearer ${token}`
-        }
-      });
-
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
   };
 
   // Validação codigo
 
   const validarCodigo = async () => {
     try {
-      if (!codigo.trim()) {
-        alert("Digite um código!");
-        return;
-      }
 
-      const res = await axios.post("http://10.144.170.38:8082/auth/verificarCodigo", {
-        codigo
-      });
+      console.log("EUDWHDUHW", codigo)
+      const res = await axios.get(`http://10.144.170.38:8082/verificarCodigo/${codigo}`);
+
+      console.log(res.data)
 
       if (res.data.valid) {
         navigation.navigate("Formulario");

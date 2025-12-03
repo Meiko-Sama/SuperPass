@@ -160,9 +160,12 @@ app.get("/empresas", async (req, res) => {
 
 
 // rota: VALIDAR CODIGO
-app.get("/auth/verificarCodigo", async (req, res) => {
+app.get("/verificarCodigo/:codigo", async (req, res) => {
   try {
-    const { codigo } = req.body;
+    console.log(req.body)
+    const { codigo } = req.params;
+
+    console.log(codigo)
 
     if (!codigo) {
       return res.status(400).json({ error: "Código não enviado!" });

@@ -5,8 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import axios from 'axios';
 
-
-
 export default function Cadastro() {
   const navigation = useNavigation();
 
