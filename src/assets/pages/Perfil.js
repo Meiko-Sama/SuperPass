@@ -74,7 +74,7 @@ export default function Perfil() {
           />
         </TouchableOpacity>
 
-        <Text style={localStyles.headerTitle}>Check-in</Text>
+        <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25, }}>Perfil</Text>
       </View>
 
       {/* Nome grande e destacado */}
