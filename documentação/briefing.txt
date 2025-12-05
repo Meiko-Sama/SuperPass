@@ -13,7 +13,9 @@ TÓPICOS
 
 O SuperPass é um aplicativo que foi criado com o intuito de fornecer uma forma mais rápida de conectar o usuário as academias, independentemente de
 sua posição geográfica, utilizando o sistema de check-in para o usuário frequentar a academia, além disso o aplicativo contará com uma interface onde
-um corpo será visível, nele o usuário poderá marcar as partes do corpo treinados feito no dia e um calendário na qual mostrará os dias idos na academia. O público alvo principal desse projeto é pessoas interessadas que buscam uma forma de poder encontrar uma academia para frequentar de forma simples, rápida e intuitiva.
+um corpo será visível, nele o usuário poderá marcar as partes do corpo treinados feito no dia e um calendário na qual mostrará os dias idos na academia.
+O público alvo principal desse projeto é pessoas interessadas que buscam uma forma de poder encontrar uma academia para frequentar de forma simples,
+rápida e intuitiva.
 
 
 1.	REQUISITOS FUNCIONAIS
@@ -21,25 +23,22 @@ um corpo será visível, nele o usuário poderá marcar as partes do corpo trein
 1.1	– ON BOARDING E AUTENTIFICAÇÃO
 
 •	Tela de On Boarding - (Tela que vai trazer algumas informações do aplicativo antes de direcionar a tela de Cadastro);
-•	Tela de Cadastro – O visitante faz o processo para se cadastrar com email nome de usuário e senha e será deslocado direto para a página Home, sendo
-necessário fazer essa etapa apenas 1 vez.
-•	Tela de Login - Se o usuário já tem uma conta ele faz o login e será redirecionado a tela Home;
+•	Tela de Cadastro – O visitante faz o processo de se cadastrar com um código único fornecido pela referida empresa, além de preencher um formulário para
+melhor experiência, e será deslocado direto para a página Home, sendo necessário fazer essa etapa apenas 1 vez.
 
 1.2	– HUB DO USUÁRIO
 
-•	Tela Home – Tela principal do aplicativo, nela inclui 3 carrosséis principais, sendo eles: Academias perto de você, Academias mais avaliadas e
-Academias que o usuário já tem o Check-In;
-•	Tela de Check-In – Nessa tela fica disponível os Check-In feita pelo membro e mostrando quais academias;
-•	Tela de Perfil – Ela mostra além das informações de cadastro uma interface de um corpo humano na qual a pessoa poderá marcar um membro do corpo e
-uma porcentagem do treino realizado e um calendário que marca os dias frequentados.
+•	Tela Home – Tela principal do aplicativo, ela possui um carrossel com as seguintes informações: nome e imagem das academias, avaliação, localização e
+aulas disponíveis;
+•	Tela de Check-In – Nesta tela o usuário poderá fazer o check-in na recepção da academia através do aplicativo;
+•	Tela de Perfil – Ela mostra além das informações de cadastro uma interface de um corpo humano na qual a pessoa poderá marcar um membro do corpo e uma
+porcentagem do treino realizado e um calendário que marca os dias frequentados.
 
 2.	REQUISITOS NÃO FUNCIONAIS
 
 2.1	– SEGURANÇA DO USUARIO
 
-•	Criptografia de informações coletadas do usuário;
-•	 Proteção contra injeção SQL;
-•	Autenticação de senha por dois fatore.
+•	Autenticação por dois fatore.
 
 2.2	 – USABILIDADE DO APP
 
@@ -48,37 +47,28 @@ uma porcentagem do treino realizado e um calendário que marca os dias frequenta
 
 2.3	– MANUTENÇÃO DO APP
 •	Sistema fácil de atualizar;
-•	Plano de recuperação de backups;
 
 2.4	– ARMAZENAMENTO DE DADOS
 •	Dados devem ser enviados corretamente no banco de dados;
 
 3.	EXPECTATIVAS DE DESIGN
 
-Para tentar trazer algo mais moderno e chamativo, as cores escolhidas são o verde neon, preto e branco, cores simples e diferentes, mas quando juntas
-traz justamente o que buscamos.
+Para tentar trazer algo mais moderno e chamativo, as cores escolhidas são o verde, preto e branco, cores inspiradas na personagem Docinho que representa
+força e em outras simbologias, esperaça.
 
 
 4.	ESCOPO
 
-No primeiro contato com o aplicativo SuperPass aparecerá a tela ONBORADING, uma tela que dará mais informações sobre as funcionalidades do app de antes
-de mandar o usuário a tela de CADASTRO/LOGIN. Depois de realizar o cadastro ou entrar com a sua conta ele será redirecionado ao HUB, nele terá 3 rotas:
-
-•	TELA HOME – Essa tela mostrará as academias separas em diferentes filtros, as mais bem avaliadas, academia perto de mim, academias que o usuário já
-tem o check-in. Seria realizado nessa tela 3 carrosséis utilizando os filtros, além de ter um rodapé com os ícones de navegação indo para as outras
-páginas do app.
-
-•	TELA CHECK-IN – A tela de check-in busca apresentar as academias visitadas pelo o usuário, academias para visitar e avaliações.
-
-•	TELA PERFIL– Essa tela conterá as informações do usuário cadastrado,  terá o calendário onde o próprio usuário marca os dias idos a academia e uma
-função que terá um corpo humano onde o usuário marca a parte do corpo treinada durante o dia, cada parte pintada representa uma porcentagem, ao atingir
-100% mostra uma mensagem parabenizando por ter completo e reinicia.
+No primeiro contato com o aplicativo SuperPass aparecerá a tela ONBORADING, uma tela que dará mais informações sobre as funcionalidades do app antes do
+usuário ter acesso a tela de CADASTRO. Depois de realizar o cadastro ele (o usuário) será redirecionado ao HUB, ali estarão disponíveis três rotas:
+tela HOME, tela CHECK-IN e tela PERFIL.
 
 
 5.	CRONOGRAMA E PRAZOS
 
-Nas primeiras aulas, a prioridade será fazer o BACK-END o mais rápido possível para que o FRONT-END, parte principal do projeto, esteja pronto antes
-da metade de novembro para que seja possível fazer uma revisão e checagem de bugs, tendo a finalidade de que o aplicativo seja entregue no prazo.
+Nas primeiras aulas, a prioridade foi fazer o FRONT-END o mais rápido possível para que existisse uma base para análise do projeto e compreensão da equipe.
+O BACK-END começou a ser programado a partir da metade de outubro. Na reta final,  a equipe se dedicou á revisão e checagem de bugs, prezando a entregue
+dentro do prazo.
 
 
 6.	METAS
@@ -97,8 +87,8 @@ da metade de novembro para que seja possível fazer uma revisão e checagem de b
 
 7.	ATRIBUIÇÃO DE CADA COLABORADOR
 
-•	Julia Custódio – Ficará encarregada do FRONT-END;
-•	Júlia Borgo – Ficará encarregada da documentação e da apresentação do trabalho final;
-•	Sarah Nicole – Ficará encarregada do FRONT-END e do BDD (Banco de Dados);
-•	Thaylini – Ficará encarregada da documentação e da apresentação do trabalho final;
-•	Thayná - Ficará encarregada do BACK-END e do BDD;
+•	Julia Custódio – Ficou encarregada do FRONT-END;
+•	Júlia Borgo – Ficou encarregada da documentação e da apresentação do trabalho final;
+•	Sarah Nicole – Ficou encarregada do FRONT-END e do BDD (Banco de Dados);
+•	Thaylini – Ficou encarregada da documentação e da apresentação do trabalho final;
+•	Thayná - Ficou encarregada do BACK-END, FRONT-END e do BDD;

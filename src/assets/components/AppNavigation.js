@@ -1,20 +1,24 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useState, useEffect } from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // IMPORTANDO PÁGINAS
 import OnBoarding from "../pages/OnBoarding";
 import Perfil from "../pages/Perfil";
 import Home from "../pages/Home";
 import CheckIn from "../pages/CheckIn";
-import Formulario from "../pages/Formulario";
 import Cadastro from "../pages/Cadastro";
 import Codigo from "../pages/Codigo";
+import TelaInicial from "../pages/TelaInicial";
+
+import Formulario from "../pages/Formulario";
+
+// DECLARANDO TAB
+const Tab = createBottomTabNavigator();
 
 // DECLARANDO STACK
 const Stack = createNativeStackNavigator();
-
-
 
 // ASYNC STORAGE
 import { getItem } from "./AsyncStorage";
@@ -26,7 +30,6 @@ export default function AppNavigation() {
   const [showOnboarding, setShowOnboarding] = useState(null);
   const [showFormulario, setShowFormulario] = useState(null);
   const [showCadastro, setShowCadastro] = useState(null);
-
 
   // Checagem Onboarding
   useEffect(() => {
@@ -48,6 +51,7 @@ export default function AppNavigation() {
 
   const checkIfAlreadyOnboarded = async () => {
     let onboarded = await getItem("onboarded");
+    console.log("ONBOARDED", onboarded)
     if (onboarded === "1") {
       setShowOnboarding(false);
     } else {
@@ -58,6 +62,7 @@ export default function AppNavigation() {
   // Checagem cadastro
   const checkIfAlreadyLoggedIn = async () => {
     let formulario = await getItem("formulario");
+    console.log("FORMULARIO", formulario)
     if (formulario === "1") {
       setShowFormulario(false);
     } else {
@@ -68,6 +73,7 @@ export default function AppNavigation() {
   // Checagem cadastro
   const checkIfAlreadySignUp = async () => {
     let cadastro = await getItem("cadastro");
+    console.log("CADASTRO", cadastro)
     if (cadastro === "1") {
       setShowCadastro(false);
     } else {
@@ -83,6 +89,18 @@ export default function AppNavigation() {
   // Se ainda não fez onboarding → manda para Onboarding
   if (showOnboarding) {
     return (
+
+      // MATHEUS CPDIGO
+
+      // <NavigationContainer >
+      //   <Tab.Navigator tabBar={props => <TabBar {...props} />} initialRouteName="Home" screenOptions={{ headerShown: false }}>
+      //     <Tab.Screen
+      //       name="Home"
+      //       component={Home}
+      //     />
+      //   </Tab.Navigator>
+      // </NavigationContainer>
+
       <NavigationContainer>
         <Stack.Navigator initialRouteName="OnBoarding">
           <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
@@ -92,6 +110,7 @@ export default function AppNavigation() {
           <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
           <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
           <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+          <Stack.Screen name="TelaInicial" component={TelaInicial} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -100,6 +119,27 @@ export default function AppNavigation() {
   // Se já fez onboarding → verifica cadastro
   if (showFormulario) {
     return (
+
+      // MATHEUS ROTA
+
+      // <NavigationContainer >
+      //   <Tab.Navigator tabBar={props => <TabBar {...props} />} screenOptions={{ headerShown: false }}>
+      //     <Tab.Screen
+      //       name="Home"
+      //       component={Home}
+      //       options={{ headerShown: false }}
+      //     />
+      //     <Tab.Screen
+      //       name="Sobre"
+      //       component={Sobre}
+      //     />
+      //     <Tab.Screen
+      //       name="Contato"
+      //       component={Contato}
+      //     />
+      //   </Tab.Navigator>
+      // </NavigationContainer>
+
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Cadastro">
           <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
@@ -109,6 +149,7 @@ export default function AppNavigation() {
           <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
           <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
           <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+          <Stack.Screen name="TelaInicial" component={TelaInicial} options={{ headerShown: false }} />
         </Stack.Navigator>
       </NavigationContainer>
     );
@@ -116,6 +157,7 @@ export default function AppNavigation() {
 
   // Se já fez onboarding e já está logado → vai direto pro Home
   return (
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Codigo">
         <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
@@ -125,7 +167,10 @@ export default function AppNavigation() {
         <Stack.Screen name="Formulario" component={Formulario} options={{ headerShown: false }} />
         <Stack.Screen name="Codigo" component={Codigo} options={{ headerShown: false }} />
         <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+        <Stack.Screen name="TelaInicial" component={TelaInicial} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
+
+
 }

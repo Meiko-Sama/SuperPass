@@ -10,18 +10,20 @@ import { useNavigation } from '@react-navigation/native';
 
 import { BlurView } from 'expo-blur';
 
-export default function Cadastro() {
+export default function Codigo() {
 
+
+  const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
+  const [codigo, setCodigo] = useState("");
 
-  const navigation = useNavigation();
-  // BOTÃO PARA O FORMULÁRIO
   const backToCad = () => {
     navigation.navigate('Cadastro');
   };
 
+  // BOTÃO PARA O FORMULÁRIO
   const goToFormulario = () => {
     navigation.navigate('Formulario');
   };
@@ -36,53 +38,32 @@ export default function Cadastro() {
 
   const [visible, setVisible] = useState(false);
 
-  const fetchProfile = async () => {
-    setLoading(true);
+  const btnEnvia = () => {
+    navigation.navigate('TelaInicial');
+  };
+
+  // Validação codigo
+
+  const validarCodigo = async () => {
     try {
-      const token = await AsyncStorage.getItem("@token");
-      if (!token) {
-        alert("Erro! Você não está logado.");
-        setLoading(false);
-        return;
+
+      console.log("EUDWHDUHW", codigo)
+      const res = await axios.get(`http://10.144.170.38:8082/verificarCodigo/${codigo}`);
+
+      console.log(res.data)
+
+      if (res.data.valid) {
+        navigation.navigate("Formulario");
+      } else {
+        alert("Código inválido!");
       }
 
-      const res = await axios.get("http://10.144.170.110:8081/auth/profile", {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-
-      setNome(res.data.user.nome);
-      setEmail(res.data.user.email);
-
     } catch (error) {
-      console.log("ERRO:", error);
-    } finally {
-      setLoading(false);
+      alert("Erro ao validar o código.");
+      console.log("Erro:", error);
     }
   };
 
-  const handleUpdate = async () => {
-    try {
-      const token = await AsyncStorage.getItem("@token");
-
-      if (!token) {
-        alert("Erro! você não está logado");
-        setLoading(false);
-        return;
-      }
-
-      const res = await axios.put("http://10.144.170.110:8081/auth/update", {
-        nome, email
-      }, {
-        headers: {
-          "Content-Type": "application/json", Authorization: `Bearer ${token}`
-        }
-      });
-
-    } catch (error) {
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <View style={[styles.containerForm, { padding: 20 }]}>
@@ -107,8 +88,10 @@ export default function Cadastro() {
         <View style={{ marginTop: 25, justifyContent: "center", alignItems: "center" }}>
           <Text style={{ color: 'rgb(10, 146, 11)', fontSize: 18, marginBottom: 5 }}>Código de acesso</Text>
           <TextInput
-            placeholder="Buscar empresa..."
-            placeholderTextColor={"#aaa"}
+            placeholder="Digite o código..."
+            placeholderTextColor="#aaa"
+            value={codigo}
+            onChangeText={setCodigo}
             style={{
               color: "white",
               backgroundColor: "#262626",
@@ -132,10 +115,10 @@ export default function Cadastro() {
             marginLeft: 15,
             backgroundColor: "green",
             borderRadius: 30,
-            marginTop: 250,
+            marginTop: 350,
             alignItems: "center"
           }}
-          onPress={goToFormulario}
+          onPress={validarCodigo}
         >
           <Text style={{ color: "white", fontSize: 16 }}>Seguir para FORMULÁRIO</Text>
         </TouchableOpacity>
@@ -159,7 +142,7 @@ export default function Cadastro() {
             paddingHorizontal: 40,
           }}>
             <Text style={{ fontSize: 18, marginBottom: 15, textAlign: "center", color: "#000" }}>
-              Você pode pedir um código para o RH da sua empresa.
+              Verifique com o RH da sua empresa, para que disponibilizem seu código de acesso.
             </Text>
             <TouchableOpacity
               style={{ backgroundColor: "#000", paddingVertical: 10, paddingHorizontal: 30, borderRadius: 20, marginTop: 15 }}
@@ -169,7 +152,13 @@ export default function Cadastro() {
             </TouchableOpacity>
           </View>
         </View>
+
       </Modal>
+
+      <View style={{
+      }}>
+
+      </View>
       <StatusBar hidden />
     </View>
   );

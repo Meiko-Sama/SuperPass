@@ -74,7 +74,7 @@ const Backdrop = ({ movies, scrollX }) => (
         />
       ))}
     <LinearGradient
-      colors={['rgba(0,0,0,0)', 'white']}
+      colors={['rgba(0,0,0,0)', 'black']}
       style={{ height: BACKDROP_HEIGHT, width, position: 'absolute', bottom: 0 }}
     />
   </View>
@@ -102,19 +102,21 @@ const MovieCard = ({ item, index, scrollX }) => {
             marginHorizontal: SPACING,
             padding: SPACING * 2,
             alignItems: 'center',
-            backgroundColor: 'white',
+            backgroundColor: 'black',
             borderRadius: 34,
+            borderWidth: 1,
+            borderColor: "white"
           },
           animatedStyle,
         ]}
       >
         <Image source={item.poster} style={styles.posterImage} />
-        <Text style={{ fontSize: 24 }} numberOfLines={1}>
+        <Text style={{ fontSize: 24, color: "white" }} numberOfLines={1}>
           {item.title}
         </Text>
         <Rating rating={item.rating} />
         <Genres genres={item.genres} />
-        <Text style={{ fontSize: 12 }} numberOfLines={3}>
+        <Text style={{ fontSize: 8, color: "white" }} numberOfLines={3}>
           {item.description}
         </Text>
       </Animated.View>
@@ -174,6 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
+    backgroundColor: "black",
     flex: 1,
   },
   paragraph: {
@@ -188,5 +191,9 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
     borderRadius: 24,
     marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#fff"
+
+
   },
 });

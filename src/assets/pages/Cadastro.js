@@ -3,9 +3,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View, FlatList, Image, A
 import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-
-
-const API_ENDPOINT = `https://randomuser.me/api/?results=30`;
+import axios from 'axios';
 
 export default function Cadastro() {
   const navigation = useNavigation();
@@ -18,16 +16,16 @@ export default function Cadastro() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData(API_ENDPOINT);
+    fetchData();
   }, []);
 
-  const fetchData = async (url) => {
+  const fetchData = async () => {
     try {
-      const response = await fetch(url);
-      const json = await response.json();
-      setData(json.results);
-      setFullData(json.results);
+      const response = await axios.get("http://10.144.170.38:8082/empresas");
+
+      console.log("ola", response.data)
       setIsLoading(false);
+      setData(response.data)
     } catch (err) {
       setError(err);
       setIsLoading(false);
@@ -72,9 +70,7 @@ export default function Cadastro() {
       />
 
       <View style={{ flexDirection: "row", width: "100%", alignItems: "center", gap: 10, marginTop: 70 }}>
-        <TouchableOpacity>
-          <FontAwesome name="arrow-circle-left" size={40} color="rgb(10, 146, 11)" />
-        </TouchableOpacity>
+
         <Text style={{ color: "rgb(10, 146, 11)", fontSize: 25 }}>Verifique sua empresa</Text>
       </View>
 
@@ -97,15 +93,11 @@ export default function Cadastro() {
       {/* Lista rolável */}
       <FlatList
         data={data}
-        keyExtractor={(item) => item.login.username}
+        keyExtractor={(item) => item.nome}
         renderItem={({ item }) => (
           <View style={styles.listItem}>
-            <Image
-              source={{ uri: item.picture.thumbnail }}
-              style={{ width: 40, height: 40, borderRadius: 10, marginRight: 110 }}
-            />
             <Text style={{ color: "white" }}>
-              {item.name.first} {item.name.last}
+              {item.nome}
             </Text>
           </View>
         )}

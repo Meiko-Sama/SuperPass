@@ -27,12 +27,13 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     borderWidth: 1,
     borderRadius: 14,
-    borderColor: '#ccc',
+    borderColor: 'grey',
     marginRight: 4,
     marginBottom: 4,
   },
   genreText: {
     fontSize: 9,
-    opacity: 0.4
+    color: "#fff"
+
   }
 });

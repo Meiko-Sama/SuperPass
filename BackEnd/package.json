@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.14.4",
     "react-dom": "19.0.0",
+    "react-native-calendars": "^1.1313.0",
     "react-native-web": "^0.20.0"
   }
 }

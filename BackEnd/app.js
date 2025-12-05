@@ -24,8 +24,7 @@ const bcrypt = require("bcrypt");
 // import jsonwebtoken
 const jwt = require("jsonwebtoken");
 
-const PORT = 3001 // onde vai rodar o back-end NO CELULAR
-
+const PORT = 8082 // onde vai rodar o back-end NO CELULAR
 
 const app = express();
 
@@ -56,12 +55,13 @@ async function conexaoDB() {
 }
 conexaoDB();
 
+// app.use(express.urlencoded({ extended: true }));
+
 // rota: FORMULARIO
 app.post("/auth/Formulario", async (req, res) => {
+  console.log("POST /auth/Formulario");
+  console.log("📩 Body recebido:", req.body);
   try {
-
-    console.log("📩 Body recebido:", req.body);
-
     const {
       nome, idade, altura, peso,
       emagrecimento, hipertrofia, saude, condicionamento,
@@ -80,12 +80,35 @@ app.post("/auth/Formulario", async (req, res) => {
       [nome, idade, altura, peso, emagrecimento, hipertrofia, saude, condicionamento, mulher, homem]
     );
     console.log("✅ Inserido com sucesso:", result);
-    res.status(201).json({ message: "Formulário cadastrado com sucesso!" });
+    res.status(201).json({ message: "Formulário cadastrado com sucesso!", id: result.insertId });
   } catch (error) {
     console.error("❌ Erro ao inserir:", error);
     res.status(500).json({ error: "Erro ao continuar." });
   }
 });
+
+// rota: PEGAR ID DO USUARIO PARA APARECER NO FORMULARIO
+app.get("/info/:id", async (req, res) => {
+  console.log("GET /info/:id", req.params);
+
+  try {
+    const [rows] = await pool.query(
+      "SELECT * FROM info WHERE id = ?",
+      [req.params.id]
+    );
+
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "Cliente não encontrado!" });
+    }
+
+    console.log("ESTOU AQUI MANO!!")
+    res.json(rows[0]);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar cliente" });
+  }
+});
+
 
 // rota: CADASTRO
 app.post("/auth/Cadastro", async (req, res) => {
@@ -119,6 +142,52 @@ app.post("/auth/Cadastro", async (req, res) => {
   }
 })
 
+// rota: BUSCAR DADOS EMPRESAS
+
+app.get("/empresas", async (req, res) => {
+  try {
+    const [rows] = await pool.query(
+      "SELECT * FROM empresas"
+    );
+
+    console.log(rows)
+
+    res.json(rows)
+  } catch (error) {
+    console.log(error)
+  }
+})
+
+
+// rota: VALIDAR CODIGO
+app.get("/verificarCodigo/:codigo", async (req, res) => {
+  try {
+    console.log(req.body)
+    const { codigo } = req.params;
+
+    console.log(codigo)
+
+    if (!codigo) {
+      return res.status(400).json({ error: "Código não enviado!" });
+    }
+
+    const [rows] = await pool.query(
+      "SELECT * FROM codigos WHERE codigo = ?",
+      [codigo]
+    );
+
+    if (rows.length === 0) {
+      return res.status(404).json({ valid: false, error: "Código inválido!" });
+    }
+
+    return res.json({ valid: true, message: "Código válido!" });
+
+  } catch (error) {
+    console.error("Erro ao verificar código:", error);
+    return res.status(500).json({ error: "Erro no servidor ao verificar código" });
+  }
+});
+
 console.log("Host:", process.env.DB_HOST);
 console.log("User:", process.env.DB_USER);
 
@@ -142,16 +211,6 @@ function autenticarToken(req, res, next) {
     req.user = user;
     next();
   })
-}
-
-async function conexaoDB() {
-  try {
-    const conn = await pool.getConnection();
-    console.log("Conexão com MYSQL bem-sucedida!");
-    conn.release();
-  } catch (error) {
-    console.log(`Error: ${error}`)
-  }
 }
 
 app.get("/", (req, res) => {
